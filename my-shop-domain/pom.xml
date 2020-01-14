@@ -16,4 +16,11 @@
     <name>my-shop-domain</name>
     <description>领域模型</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
