@@ -1,17 +1,18 @@
 package com.wenwl.my.shop.web.admin.web.controller;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import com.wenwl.my.shop.commons.constants.ConstantUtils;
-import com.wenwl.my.shop.domain.entity.User;
+import com.wenwl.my.shop.domain.entity.TbUser;
 import com.wenwl.my.shop.web.admin.commons.utils.CookieUtil;
-import com.wenwl.my.shop.web.admin.service.UserService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+//import com.wenwl.my.shop.web.admin.service.UserService;
 
 /**
  * @author wenwl
@@ -23,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
     @GetMapping(value = {"", "login"})
     public String login(HttpServletRequest req) {
@@ -42,7 +43,8 @@ public class LoginController {
     @PostMapping(value = "login")
     public String login(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest req, HttpServletResponse resp) {
 
-        User user = userService.login(email, password);
+//        User user = userService.login(email, password);
+        TbUser user = null;
         boolean isRememberMe = req.getParameter("isRemember") != null;
 
         //用户选择不记住

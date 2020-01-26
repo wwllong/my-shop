@@ -79,6 +79,17 @@
         </dependency>
         <!-- MyBatis End -->
 
+        <!-- Test Begin -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!-- Test End -->
+
     </dependencies>
 
 </project>

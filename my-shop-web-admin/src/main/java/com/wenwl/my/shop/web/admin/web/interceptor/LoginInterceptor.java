@@ -1,7 +1,7 @@
 package com.wenwl.my.shop.web.admin.web.interceptor;
 
 import com.wenwl.my.shop.commons.constants.ConstantUtils;
-import com.wenwl.my.shop.domain.entity.User;
+import com.wenwl.my.shop.domain.entity.TbUser;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
-        User user = (User)httpServletRequest.getSession().getAttribute(ConstantUtils.SESSION_USER);
+        TbUser user = (TbUser)httpServletRequest.getSession().getAttribute(ConstantUtils.SESSION_USER);
 
         // 判断用户有无登陆
         if(user == null){

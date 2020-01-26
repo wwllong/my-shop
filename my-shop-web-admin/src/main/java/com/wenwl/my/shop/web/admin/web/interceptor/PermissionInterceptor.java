@@ -1,7 +1,7 @@
 package com.wenwl.my.shop.web.admin.web.interceptor;
 
 import com.wenwl.my.shop.commons.constants.ConstantUtils;
-import com.wenwl.my.shop.domain.entity.User;
+import com.wenwl.my.shop.domain.entity.TbUser;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,7 +26,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
         // 请求来自登录页
         if(modelAndView.getViewName().endsWith("login")){
-            User user = (User)httpServletRequest.getSession().getAttribute(ConstantUtils.SESSION_USER);
+            TbUser user = (TbUser)httpServletRequest.getSession().getAttribute(ConstantUtils.SESSION_USER);
             if(user != null){
                 //直接重定向到首页
                 httpServletResponse.sendRedirect("/main");
