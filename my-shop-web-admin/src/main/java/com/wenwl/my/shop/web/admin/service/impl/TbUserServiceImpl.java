@@ -5,6 +5,7 @@ import com.wenwl.my.shop.web.admin.dao.TbUserDao;
 import com.wenwl.my.shop.web.admin.service.TbUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.util.List;
 
@@ -64,6 +65,17 @@ public class TbUserServiceImpl implements TbUserService {
     }
 
     /**
+     * 更新
+     *
+     * @param tbUser
+     * @return
+     */
+    @Override
+    public Integer update(TbUser tbUser) {
+        return tbUserDao.update(tbUser);
+    }
+
+    /**
      * 模糊查询
      *
      * @param username
@@ -72,6 +84,29 @@ public class TbUserServiceImpl implements TbUserService {
     @Override
     public List<TbUser> selectByName(String username) {
         return tbUserDao.selectByName(username);
+    }
+
+    /**
+     * 登陆
+     *
+     * @param email
+     * @param password
+     * @return
+     */
+    @Override
+    public TbUser login(String email, String password) {
+        TbUser tbUser = tbUserDao.getByEmail(email);
+        if(tbUser != null){
+            // 明文密码加密
+            String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
+
+            // 判断密码是否匹配
+            if(md5Password.equals(tbUser.getPassword())){
+                return tbUser;
+            }
+
+        }
+        return null;
     }
 
 

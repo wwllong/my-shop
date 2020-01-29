@@ -39,10 +39,24 @@ public interface TbUserService {
     public TbUser getById(Long id);
 
     /**
+     * 更新
+     * @param tbUser
+     * @return
+     */
+    public Integer update(TbUser tbUser);
+
+    /**
      * 模糊查询
      * @param username
      * @return
      */
     public List<TbUser> selectByName(String username);
 
+    /**
+     * 登陆
+     * @param email
+     * @param password
+     * @return
+     */
+    TbUser login(String email, String password);
 }

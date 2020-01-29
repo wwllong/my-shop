@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.DigestUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -54,6 +55,14 @@ public class TbUserServiceTest {
     public void testGetById() {
         TbUser tbUser = tbUserService.getById(37L);
         System.out.println(tbUser);
+    }
+
+    @Test
+    public void testUpdate() {
+        TbUser tbUser = tbUserService.getById(37L);
+        tbUser.setPassword(DigestUtils.md5DigestAsHex("admin".getBytes()));
+
+        tbUserService.update(tbUser);
     }
 
     @Test
