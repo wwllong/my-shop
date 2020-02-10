@@ -1,5 +1,6 @@
 package com.wenwl.my.shop.web.admin.service;
 
+import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.domain.entity.TbUser;
 
 import java.util.List;
@@ -19,10 +20,10 @@ public interface TbUserService {
     public List<TbUser> selectAll();
 
     /**
-     * 插入一条用户信息
+     * 保存用户信息
      * @return
      */
-    public Integer insert(TbUser tbUser);
+    public BaseResult save(TbUser tbUser);
 
     /**
      * 删除用户
@@ -38,12 +39,6 @@ public interface TbUserService {
      */
     public TbUser getById(Long id);
 
-    /**
-     * 更新
-     * @param tbUser
-     * @return
-     */
-    public Integer update(TbUser tbUser);
 
     /**
      * 模糊查询

@@ -30,6 +30,14 @@
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
+
+                    <c:if test="${baseResult.status != null}">
+                        <div class="alert alert-${baseResult.status == 200 ? "success":"danger"} alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="icon fa fa-${baseResult.status == 200 ? "check":"ban"}"></i> ${baseResult.message}
+                        </div>
+                    </c:if>
+
                     <div class="box">
                         <div class="box-header">
                             <h3 class="box-title">用户列表</h3>
@@ -45,11 +53,12 @@
                             </div>
 
                             <div class="row" style="padding-left:12px; padding-top: 10px;">
-                                <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-plus"></i> 新增</a>
+                                <a href="/user/form" class="btn btn-xs btn-default" type="button"><i class="fa fa-plus"></i> 新增</a>
                                 <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-trash-o"></i> 删除</a>
                                 <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-download"></i> 导入</a>
                                 <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>
                             </div>
+
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">

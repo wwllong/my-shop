@@ -40,7 +40,7 @@ public class TbUserServiceTest {
         tbUser.setUsername("wenwl");
         tbUser.setCreated(new Date());
         tbUser.setUpdated(new Date());
-        tbUserService.insert(tbUser);
+        tbUserService.save(tbUser);
 
     }
 
@@ -62,7 +62,7 @@ public class TbUserServiceTest {
         TbUser tbUser = tbUserService.getById(37L);
         tbUser.setPassword(DigestUtils.md5DigestAsHex("admin".getBytes()));
 
-        tbUserService.update(tbUser);
+        tbUserService.save(tbUser);
     }
 
     @Test
