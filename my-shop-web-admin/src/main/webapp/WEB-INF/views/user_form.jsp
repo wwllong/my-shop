@@ -41,34 +41,34 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form:form action="/user/save" method="post" cssClass="form-horizontal" modelAttribute="tbUser">
+                        <form:form id="inputForm" action="/user/save" method="post" cssClass="form-horizontal" modelAttribute="tbUser">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="email" class="col-sm-2 control-label">邮箱</label>
 
                                     <div class="col-sm-10">
-                                        <form:input path="email" cssClass="form-control" placeholder="请输入邮箱"/>
+                                        <form:input path="email" cssClass="form-control required" placeholder="请输入邮箱"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="col-sm-2 control-label">密码</label>
 
                                     <div class="col-sm-10">
-                                        <form:password path="password" cssClass="form-control" placeholder="请输入密码"/>
+                                        <form:password path="password" cssClass="form-control required" placeholder="请输入密码"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="username" class="col-sm-2 control-label">姓名</label>
 
                                     <div class="col-sm-10">
-                                        <form:input path="username" cssClass="form-control" placeholder="请输入用户姓名" />
+                                        <form:input path="username" cssClass="form-control required" placeholder="请输入用户姓名" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone" class="col-sm-2 control-label">手机</label>
 
                                     <div class="col-sm-10">
-                                        <form:input path="phone" cssClass="form-control" placeholder="请输入手机号" />
+                                        <form:input path="phone" cssClass="form-control required mobile" placeholder="请输入手机号" />
                                     </div>
                                 </div>
                             </div>
@@ -91,5 +91,10 @@
 </div>
 
 <jsp:include page="../includes/footer.jsp" />
+<script>
+    $(function () {
+       Validate.validateForm("inputForm");
+    });
+</script>
 </body>
 </html>
