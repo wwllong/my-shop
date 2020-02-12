@@ -75,4 +75,17 @@ public class UserController {
         }
     }
 
+    /**
+     * 搜索
+     * @param tbUser
+     * @param model
+     * @return
+     */
+    @PostMapping(value = "search")
+    public String search(TbUser tbUser,Model model){
+        List<TbUser> tbUsers = userService.search(tbUser);
+        model.addAttribute("tbUsers",tbUsers);
+        return "user_list";
+    }
+
 }

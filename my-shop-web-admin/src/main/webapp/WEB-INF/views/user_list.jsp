@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,21 +43,35 @@
                         <div class="box-header">
                             <h3 class="box-title">用户列表</h3>
 
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="搜索">
-
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row" style="padding-left:12px; padding-top: 10px;">
                                 <a href="/user/form" class="btn btn-xs btn-default" type="button"><i class="fa fa-plus"></i> 新增</a>
                                 <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-trash-o"></i> 删除</a>
                                 <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-download"></i> 导入</a>
                                 <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>
+                            </div>
+
+                            <div class="row">
+                                <form:form id="inputForm" action="/user/search" method="post" cssClass="navbar-form" modelAttribute="tbUser">
+                                    <div class="form-group input-group-sm">
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <label for="username" class="control-label">用户名</label>
+                                                <form:input path="username" cssClass="form-control" placeholder="请输入用户名"/>
+                                            </div>
+                                            <div class="form-group input-group-sm">
+                                                <label for="email" class="control-label">邮箱</label>
+                                                <form:input path="email" cssClass="form-control" placeholder="请输入邮箱"/>
+                                            </div>
+                                            <div class="form-group input-group-sm">
+                                                <label for="phone" class="control-label">手机</label>
+                                                <form:input path="phone" cssClass="form-control" placeholder="请输入手机"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-sm btn-default">搜索</button>
+                                    </div>
+                                </form:form>
                             </div>
 
                         </div>
@@ -101,5 +116,10 @@
 </div>
 
 <jsp:include page="../includes/footer.jsp" />
+<script>
+    $(function () {
+        Validate.validateForm("inputForm");
+    });
+</script>
 </body>
 </html>

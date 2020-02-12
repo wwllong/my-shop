@@ -54,4 +54,9 @@ public interface TbUserService {
      * @return
      */
     TbUser login(String email, String password);
+
+    /**
+     * 搜索
+     */
+    List<TbUser> search(TbUser tbUser);
 }

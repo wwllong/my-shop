@@ -123,6 +123,16 @@ public class TbUserServiceImpl implements TbUserService {
     }
 
     /**
+     * 搜索
+     *
+     * @param tbUser
+     */
+    @Override
+    public List<TbUser> search(TbUser tbUser) {
+        return tbUserDao.search(tbUser);
+    }
+
+    /**
      * 用户信息的有效检验
      * @param tbUser
      */
