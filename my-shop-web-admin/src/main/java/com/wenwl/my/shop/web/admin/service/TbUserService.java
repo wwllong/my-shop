@@ -30,7 +30,7 @@ public interface TbUserService {
      * @param tbUser
      * @return
      */
-    public Integer delete(TbUser tbUser);
+    public int delete(TbUser tbUser);
 
     /**
      * 查询用户
@@ -59,4 +59,12 @@ public interface TbUserService {
      * 搜索
      */
     List<TbUser> search(TbUser tbUser);
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    long deleteMulti(String[] ids);
+
 }

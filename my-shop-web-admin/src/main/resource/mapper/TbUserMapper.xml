@@ -11,6 +11,7 @@
         a.created,
         a.updated
     </sql>
+
     <select id="selectAll" resultType="TbUser">
         SELECT
           <include refid="tbUserColumns"/>
@@ -101,5 +102,13 @@
             </if>
         </where>
     </select>
+
+    <delete id="deleteMulti" >
+        DELETE FROM tb_user
+        WHERE id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

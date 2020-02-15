@@ -25,7 +25,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
 
         // 请求来自登录页
-        if(modelAndView.getViewName().endsWith("login")){
+        if(modelAndView != null && modelAndView.getViewName()!=null && modelAndView.getViewName().endsWith("login")){
             TbUser user = (TbUser)httpServletRequest.getSession().getAttribute(ConstantUtils.SESSION_USER);
             if(user != null){
                 //直接重定向到首页

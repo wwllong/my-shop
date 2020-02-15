@@ -3,13 +3,11 @@ package com.wenwl.my.shop.web.admin.web.controller;
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.domain.entity.TbUser;
 import com.wenwl.my.shop.web.admin.service.TbUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -88,4 +86,17 @@ public class UserController {
         return "user_list";
     }
 
+    @ResponseBody
+    @PostMapping(value = "delete")
+    public BaseResult delete(String ids){
+        BaseResult baseResult = null;
+        if(StringUtils.isNotBlank(ids)){
+            String[] idArray = ids.split(",");
+            userService.deleteMulti(idArray);
+            baseResult = BaseResult.success("删除成功");
+        }else{
+            baseResult = BaseResult.fail("删除失败");
+        }
+        return baseResult;
+    }
 }

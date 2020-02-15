@@ -22,8 +22,11 @@
 <script src="/static/assets/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script src="/static/assets/plugins/jquery-validation/js/additional-methods.min.js"></script>
 <script src="/static/assets/plugins/jquery-validation/js/localization/messages_zh.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="/static/assets/plugins/iCheck/icheck.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/static/assets/js/adminlte.min.js"></script>
 
 <!-- App -->
 <script src="/static/assets/js/app/validate.js"></script>
+<script src="/static/assets/js/app/app.js"></script>

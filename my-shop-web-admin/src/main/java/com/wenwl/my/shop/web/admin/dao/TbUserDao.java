@@ -24,12 +24,12 @@ public interface TbUserDao {
      * 插入一条用户信息
      * @return
      */
-    public Integer insert(TbUser tbUser);
+    public int insert(TbUser tbUser);
 
     /**
      * 删除用户Id
      */
-    public Integer delete(TbUser tbUser);
+    public int delete(TbUser tbUser);
 
     /**
      * 查询单个对象
@@ -43,7 +43,7 @@ public interface TbUserDao {
      * @param tbUser
      * @return
      */
-    public Integer update(TbUser tbUser);
+    public int update(TbUser tbUser);
 
     /**
      * 模糊查询
@@ -63,5 +63,13 @@ public interface TbUserDao {
      * 搜索
      */
     public List<TbUser> search(TbUser tbUser);
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    long deleteMulti(String[] ids);
+
 
 }

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
 
                             <div class="row" style="padding-left:12px; padding-top: 10px;">
                                 <a href="/user/form" class="btn btn-xs btn-default" type="button"><i class="fa fa-plus"></i> 新增</a>
-                                <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-trash-o"></i> 删除</a>
+                                <button type="button" class="btn btn-xs btn-default" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
                                 <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-download"></i> 导入</a>
                                 <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>
                             </div>
@@ -78,16 +79,21 @@
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>用户名</th>
-                                    <th>手机号</th>
-                                    <th>邮箱</th>
-                                    <th>更新时间</th>
-                                    <th>操作</th>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" class="minimal checkbox-all" /></th>
+                                        <th>ID</th>
+                                        <th>用户名</th>
+                                        <th>手机号</th>
+                                        <th>邮箱</th>
+                                        <th>更新时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 <c:forEach items="${tbUsers}" var="tbUser">
                                     <tr>
+                                        <td><input type="checkbox" class="minimal" value="${tbUser.id}" /></td>
                                         <td>${tbUser.id}</td>
                                         <td>${tbUser.username}</td>
                                         <td>${tbUser.phone}</td>
@@ -96,10 +102,11 @@
                                         <td>
                                             <a href="#" class="btn btn-xs btn-primary" type="button"><i class="fa fa-search"></i> 查看</a>
                                             <a href="#" class="btn btn-xs btn-warning" type="button"><i class="fa fa-edit"></i> 编辑</a>
-                                            <a href="#" class="btn btn-xs btn-danger" type="button"><i class="fa fa-trash-o"></i> 删除</a>
+                                            <button class="btn btn-xs btn-danger" type="button" onclick="App.deleteSingle('/user/delete',${tbUser.id})"><i class="fa fa-trash-o"></i> 删除</button>
                                         </td>
                                     </tr>
                                 </c:forEach>
+                                </tbody>
                             </table>
                         </div>
                         <!-- /.box-body -->
@@ -116,9 +123,14 @@
 </div>
 
 <jsp:include page="../includes/footer.jsp" />
+<!-- 自定义模态框 -->
+<tags:modal_confirm />
+
 <script>
     $(function () {
+        // 表单验证
         Validate.validateForm("inputForm");
+
     });
 </script>
 </body>

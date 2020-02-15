@@ -1,5 +1,5 @@
 /**
- * 函数对象
+ * 函数对象-validate app
  */
 var Validate = function () {
 

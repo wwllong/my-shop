@@ -73,7 +73,7 @@ public class TbUserServiceImpl implements TbUserService {
      * @return
      */
     @Override
-    public Integer delete(TbUser tbUser) {
+    public int delete(TbUser tbUser) {
         return tbUserDao.delete(tbUser);
     }
 
@@ -130,6 +130,17 @@ public class TbUserServiceImpl implements TbUserService {
     @Override
     public List<TbUser> search(TbUser tbUser) {
         return tbUserDao.search(tbUser);
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    public long deleteMulti(String[] ids) {
+        return tbUserDao.deleteMulti(ids);
     }
 
     /**
