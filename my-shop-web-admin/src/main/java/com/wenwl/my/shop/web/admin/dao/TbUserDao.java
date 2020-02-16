@@ -16,12 +16,6 @@ import java.util.Map;
 public interface TbUserDao {
 
     /**
-     * 查询全部用户信息
-     * @return
-     */
-    public List<TbUser> selectAll();
-
-    /**
      * 插入一条用户信息
      * @return
      */
@@ -45,13 +39,6 @@ public interface TbUserDao {
      * @return
      */
     public int update(TbUser tbUser);
-
-    /**
-     * 模糊查询
-     * @param username
-     * @return
-     */
-    public List<TbUser> selectByName(String username);
 
     /**
      * 根据邮箱查询

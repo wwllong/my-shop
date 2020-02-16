@@ -16,12 +16,6 @@ import java.util.Map;
 public interface TbUserService {
 
     /**
-     * 查询全部用户信息
-     * @return
-     */
-    public List<TbUser> selectAll();
-
-    /**
      * 保存用户信息
      * @return
      */
@@ -40,14 +34,6 @@ public interface TbUserService {
      * @return
      */
     public TbUser getById(Long id);
-
-
-    /**
-     * 模糊查询
-     * @param username
-     * @return
-     */
-    public List<TbUser> selectByName(String username);
 
     /**
      * 登陆

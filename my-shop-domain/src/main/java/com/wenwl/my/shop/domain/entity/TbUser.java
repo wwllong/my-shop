@@ -25,6 +25,9 @@ public class TbUser extends BaseEntity{
     private String phone;
     private String email;
 
+    /**
+     * 登陆（记住我）
+     */
     private String rememberMe;
 
 }

@@ -45,8 +45,8 @@
                             <h3 class="box-title">用户列表</h3>
 
                             <div class="row" style="padding-left:12px; padding: 10px;">
-                                <a href="/user/form" class="btn btn-sm btn-default" type="button"><i class="fa fa-plus"></i> 新增</a>
-                                <button type="button" class="btn btn-sm btn-default" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
+                                <a href="/user/form" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus"></i> 新增</a>
+                                <button type="button" class="btn btn-sm btn-danger" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
 <%--                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-download"></i> 导入</a>--%>
 <%--                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>--%>
                             </div>
@@ -56,21 +56,21 @@
                                     <div class="form-group input-group-sm">
                                         <div class="form-inline">
                                             <div class="form-group">
-                                                <label for="username" class="control-label">用户名</label>
+                                                <label for="username" class="control-label">用户名：</label>
                                                 <input id="username" class="form-control" placeholder="请输入用户名"/>
                                             </div>
                                             <div class="form-group input-group-sm">
-                                                <label for="email" class="control-label">邮箱</label>
+                                                <label for="email" class="control-label">邮箱：</label>
                                                 <input id="email" class="form-control" placeholder="请输入邮箱"/>
                                             </div>
                                             <div class="form-group input-group-sm">
-                                                <label for="phone" class="control-label">手机</label>
+                                                <label for="phone" class="control-label">手机：</label>
                                                 <input id="phone" class="form-control" placeholder="请输入手机"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-sm btn-default" id="btn-search">搜索</button>
+                                        <button type="button" class="btn btn-sm btn-default" id="btn-search"><i class="fa fa-search"></i> 搜索</button>
                                     </div>
                                 </from>
                             </div>
@@ -116,9 +116,10 @@
 <script>
 
     $(function () {
-        // 表单验证
+        // 表单验证-初始化
         Validate.validateForm("inputForm");
 
+        // 表单对应的列
         let columns = [
             {
                 "data": function (row, type, val, meta) {
@@ -138,17 +139,18 @@
                 "data": function (row, type, val, meta) {
                     var detailURL = "/user/detail?id="+row.id;
                     var deleteURL = "/user/delete";
-                    return '<button type="button" class="btn btn-sm btn-default" onclick="App.showDetail(\''+detailURL+'\')"><i class="fa fa-search"></i> 查看</button>&nbsp;&nbsp;' +
-                        '<a href="/user/form?id='+row.id+'" type="button" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;' +
+                    return '<button type="button" class="btn btn-sm btn-primary" onclick="App.showDetail(\''+detailURL+'\')"><i class="fa fa-sticky-note-o"></i> 查看</button>&nbsp;&nbsp;' +
+                        '<a href="/user/form?id='+row.id+'" type="button" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;' +
                         '<button  type="button" class="btn btn-sm btn-danger" onclick="App.deleteSingle(\'' + deleteURL + '\', \'' + row.id + '\')"><i class="fa fa-trash-o"></i> 删除</button >';
 
                 }
             }
         ];
 
+        // 表格初始化
         let _dataTable = App.initDataTables( "/user/page",columns);
 
-        //查询
+        // 搜索
         $("#btn-search").bind("click",function () {
             var param = {
                 "username": $("#username").val(),
@@ -157,6 +159,7 @@
             };
             App.search(_dataTable,param);
         });
+
     });
 
 </script>

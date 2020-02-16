@@ -1,5 +1,5 @@
 /**
- * icheck app
+ * icheck 、datatable - app
  */
 var App = function () {
 
@@ -248,18 +248,43 @@ var App = function () {
             handlerInitCheckbox();
             handlerCheckboxAll();
         },
+        /**
+         * 删除单条记录
+         * @param url
+         * @param id
+         * @param msg
+         */
         deleteSingle : function (url, id, msg) {
             handlerDeleteSingle(url, id, msg);
         },
+        /**
+         * 批量删除
+         * @param url
+         */
         deleteMulti : function (url) {
             handlerDeleteMulti(url);
         },
+        /**
+         * datatable 初始化
+         * @param url 表格请求连接
+         * @param columns 表格对应的列
+         * @returns {jQuery}
+         */
         initDataTables : function (url, columns) {
            return  handlerInitDataTables(url, columns);
         },
+        /**
+         * 详情
+         * @param url
+         */
         showDetail : function (url) {
             handlerShowDetail(url);
         },
+        /**
+         * 搜索
+         * @param dataTable 表格实体
+         * @param param 搜索条件
+         */
         search : function (dataTable,param) {
             handlerSearch(dataTable,param);
         }

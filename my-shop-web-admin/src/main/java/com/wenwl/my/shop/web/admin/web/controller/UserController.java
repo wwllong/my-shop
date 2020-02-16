@@ -2,7 +2,6 @@ package com.wenwl.my.shop.web.admin.web.controller;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.commons.dto.PageInfo;
-import com.wenwl.my.shop.commons.persistence.BaseEntity;
 import com.wenwl.my.shop.domain.entity.TbUser;
 import com.wenwl.my.shop.web.admin.service.TbUserService;
 import org.apache.commons.lang3.StringUtils;
@@ -13,10 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author wenwl

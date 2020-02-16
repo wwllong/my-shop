@@ -12,9 +12,17 @@ import java.io.Serializable;
 public class BaseResult implements Serializable {
 
     public static final int STATUS_SUCCESS = 200;
+
     public static final int STATUS_FAIL = 500;
 
+    /**
+     * 状态码
+     */
     private int status;
+
+    /**
+     * 返回给客户端的信息
+     */
     private String message;
 
     public static BaseResult success(){

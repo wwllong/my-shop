@@ -2,7 +2,6 @@ package com.wenwl.my.shop.web.admin.service.impl;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.commons.dto.PageInfo;
-import com.wenwl.my.shop.commons.persistence.BaseEntity;
 import com.wenwl.my.shop.commons.utils.RegexpUtils;
 import com.wenwl.my.shop.domain.entity.TbUser;
 import com.wenwl.my.shop.web.admin.dao.TbUserDao;
@@ -27,16 +26,6 @@ public class TbUserServiceImpl implements TbUserService {
 
     @Autowired
     private TbUserDao tbUserDao;
-
-    /**
-     * 查询全部用户信息
-     *
-     * @return
-     */
-    @Override
-    public List<TbUser> selectAll() {
-        return tbUserDao.selectAll();
-    }
 
     /**
      * 保存用户信息
@@ -89,17 +78,6 @@ public class TbUserServiceImpl implements TbUserService {
     @Override
     public TbUser getById(Long id) {
         return tbUserDao.getById(id);
-    }
-
-    /**
-     * 模糊查询
-     *
-     * @param username
-     * @return
-     */
-    @Override
-    public List<TbUser> selectByName(String username) {
-        return tbUserDao.selectByName(username);
     }
 
     /**

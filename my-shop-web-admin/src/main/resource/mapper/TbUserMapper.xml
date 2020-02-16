@@ -12,13 +12,6 @@
         a.updated
     </sql>
 
-    <select id="selectAll" resultType="TbUser">
-        SELECT
-          <include refid="tbUserColumns"/>
-        FROM
-          tb_user AS a
-    </select>
-
     <insert id="insert">
         INSERT INTO tb_user (
             id,
@@ -55,26 +48,17 @@
     </select>
 
     <update id="update">
-    UPDATE
-      tb_user
-    SET
-      username = #{username},
-      password = #{password},
-      phone = #{phone},
-      email = #{email},
-      created = #{created},
-      updated = #{updated}
-      WHERE id = #{id}
-</update>
-
-    <select id="selectByName" resultType="TbUser">
-        SELECT
-            <include refid="tbUserColumns"/>
-        FROM
-          tb_user AS a
-        WHERE
-          a.username LIKE CONCAT ('%', #{username}, '%')
-    </select>
+        UPDATE
+          tb_user
+        SET
+          username = #{username},
+          password = #{password},
+          phone = #{phone},
+          email = #{email},
+          created = #{created},
+          updated = #{updated}
+          WHERE id = #{id}
+    </update>
 
     <select id="getByEmail" resultType="TbUser">
         SELECT

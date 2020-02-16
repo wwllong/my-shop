@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author wenwl
@@ -24,12 +23,6 @@ public class TbUserServiceTest {
 
     @Autowired
     private TbUserService tbUserService;
-
-    @Test
-    public void testSelectAll(){
-        List<TbUser> tbUsers = tbUserService.selectAll();
-        tbUsers.forEach(System.out::println);
-    }
 
     @Test
     public void testInsert(){
@@ -63,14 +56,6 @@ public class TbUserServiceTest {
         tbUser.setPassword(DigestUtils.md5DigestAsHex("admin".getBytes()));
 
         tbUserService.save(tbUser);
-    }
-
-    @Test
-    public void testSelectByName() {
-        List<TbUser> tbUsers = tbUserService.selectByName("niu");
-        for (TbUser tbUser : tbUsers) {
-            System.out.println(tbUser.getUsername());
-        }
     }
 
 
