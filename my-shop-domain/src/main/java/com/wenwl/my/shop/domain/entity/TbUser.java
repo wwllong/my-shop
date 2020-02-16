@@ -1,7 +1,9 @@
 package com.wenwl.my.shop.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wenwl.my.shop.commons.persistence.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,9 +16,11 @@ import java.util.Date;
  * @vserion 1.0.0
  */
 @Data
-public class TbUser extends BaseEntity implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class TbUser extends BaseEntity{
 
     private String username;
+    @JsonIgnore
     private String password;
     private String phone;
     private String email;

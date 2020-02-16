@@ -44,35 +44,35 @@
                         <div class="box-header">
                             <h3 class="box-title">用户列表</h3>
 
-                            <div class="row" style="padding-left:12px; padding-top: 10px;">
+                            <div class="row" style="padding-left:12px; padding: 10px;">
                                 <a href="/user/form" class="btn btn-sm btn-default" type="button"><i class="fa fa-plus"></i> 新增</a>
                                 <button type="button" class="btn btn-sm btn-default" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
-                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-download"></i> 导入</a>
-                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>
+<%--                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-download"></i> 导入</a>--%>
+<%--                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>--%>
                             </div>
 
                             <div class="row">
-                                <form:form id="inputForm" action="/user/search" method="post" cssClass="navbar-form" modelAttribute="tbUser">
+                                <from class="navbar-form">
                                     <div class="form-group input-group-sm">
                                         <div class="form-inline">
                                             <div class="form-group">
                                                 <label for="username" class="control-label">用户名</label>
-                                                <form:input path="username" cssClass="form-control" placeholder="请输入用户名"/>
+                                                <input id="username" class="form-control" placeholder="请输入用户名"/>
                                             </div>
                                             <div class="form-group input-group-sm">
                                                 <label for="email" class="control-label">邮箱</label>
-                                                <form:input path="email" cssClass="form-control" placeholder="请输入邮箱"/>
+                                                <input id="email" class="form-control" placeholder="请输入邮箱"/>
                                             </div>
                                             <div class="form-group input-group-sm">
                                                 <label for="phone" class="control-label">手机</label>
-                                                <form:input path="phone" cssClass="form-control" placeholder="请输入手机"/>
+                                                <input id="phone" class="form-control" placeholder="请输入手机"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-sm btn-default">搜索</button>
+                                        <button type="button" class="btn btn-sm btn-default" id="btn-search">搜索</button>
                                     </div>
-                                </form:form>
+                                </from>
                             </div>
 
                         </div>
@@ -114,6 +114,7 @@
 <tags:modal_detail />
 
 <script>
+
     $(function () {
         // 表单验证
         Validate.validateForm("inputForm");
@@ -145,8 +146,17 @@
             }
         ];
 
-        App.initDataTables( "/user/page",columns);
+        let _dataTable = App.initDataTables( "/user/page",columns);
 
+        //查询
+        $("#btn-search").bind("click",function () {
+            var param = {
+                "username": $("#username").val(),
+                "email": $("#email").val(),
+                "phone": $("#phone").val(),
+            };
+            App.search(_dataTable,param);
+        });
     });
 
 </script>

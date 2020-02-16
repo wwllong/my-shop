@@ -105,7 +105,7 @@ public class UserController {
 
     @ResponseBody
     @GetMapping(value = "page")
-    public PageInfo<TbUser> page(HttpServletRequest req){
+    public PageInfo<TbUser> page(HttpServletRequest req,TbUser tbUser){
 
         String drawStr = req.getParameter("draw");
         String startStr = req.getParameter("start");
@@ -118,6 +118,7 @@ public class UserController {
         HashMap<String, Object> params = new HashMap<>();
         params.put("page",start);
         params.put("pageSize",length);
+        params.put("tbUser",tbUser);
         PageInfo<TbUser> pageInfo = userService.page(params);
         pageInfo.setDraw(draw);
         return pageInfo;

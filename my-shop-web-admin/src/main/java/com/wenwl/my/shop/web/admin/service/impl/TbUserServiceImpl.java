@@ -156,7 +156,7 @@ public class TbUserServiceImpl implements TbUserService {
     public PageInfo<TbUser> page(Map<String, Object> params) {
         PageInfo<TbUser> pageInfo = new PageInfo<>();
 
-        int count = tbUserDao.count();
+        int count = tbUserDao.count((TbUser)params.get("tbUser"));
         List<TbUser> tbUsers = tbUserDao.page(params);
 
         pageInfo.setRecordsTotal(count);
@@ -172,8 +172,8 @@ public class TbUserServiceImpl implements TbUserService {
      * @return
      */
     @Override
-    public int count() {
-        return tbUserDao.count();
+    public int count(TbUser tbUser) {
+        return tbUserDao.count(tbUser);
     }
 
     /**

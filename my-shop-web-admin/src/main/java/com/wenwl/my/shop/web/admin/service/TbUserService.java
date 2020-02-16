@@ -80,6 +80,6 @@ public interface TbUserService {
      * 统计总记录数
      * @return
      */
-    public int count();
+    public int count(TbUser tbUser);
 
 }

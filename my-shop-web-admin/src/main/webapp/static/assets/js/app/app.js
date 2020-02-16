@@ -155,7 +155,7 @@ var App = function () {
      * DT初始化
      */
     let handlerInitDataTables = function (url, columns) {
-        $('#dataTable').DataTable({
+        let _dataTable = $('#dataTable').DataTable({
             //是否自适应宽度,禁止这个选项可以实现最优的性能
             "autoWidth": true,
             //是否显示表格左下角的信息
@@ -212,6 +212,8 @@ var App = function () {
                 }
             }
         });
+
+        return _dataTable;
     };
 
     /**
@@ -229,6 +231,15 @@ var App = function () {
         });
     };
 
+    /**
+     * 搜索
+     * @param param
+     */
+    let handlerSearch = function (dataTable,param) {
+        dataTable.settings()[0].ajax.data = param;
+        dataTable.ajax.reload();
+    }
+
     return {
         /**
          * 初始化iCheck以及全选功能
@@ -244,10 +255,13 @@ var App = function () {
             handlerDeleteMulti(url);
         },
         initDataTables : function (url, columns) {
-            handlerInitDataTables(url, columns);
+           return  handlerInitDataTables(url, columns);
         },
         showDetail : function (url) {
             handlerShowDetail(url);
+        },
+        search : function (dataTable,param) {
+            handlerSearch(dataTable,param);
         }
 
     }
