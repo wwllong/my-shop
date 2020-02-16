@@ -4,6 +4,7 @@ import com.wenwl.my.shop.domain.entity.TbUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wenwl
@@ -71,5 +72,16 @@ public interface TbUserDao {
      */
     long deleteMulti(String[] ids);
 
+    /**
+     * 分页查询
+     * @param params
+     * @return
+     */
+    public List<TbUser> page(Map<String,Object> params);
 
+    /**
+     * 统计总记录数
+     * @return
+     */
+    public int count();
 }

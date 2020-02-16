@@ -13,7 +13,7 @@ var App = function () {
     /**
      * 激活iCheck，初始化iCheck
      */
-    let handlerInit = function () {
+    let handlerInitCheckbox = function () {
         // 激活 iCheck
         $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
             checkboxClass: 'icheckbox_minimal-blue',
@@ -149,6 +149,69 @@ var App = function () {
                 });
             },500);
         }
+    };
+
+    /**
+     * DT初始化
+     */
+    let handlerInitDataTables = function (url, columns) {
+        $('#dataTable').DataTable({
+            //是否自适应宽度,禁止这个选项可以实现最优的性能
+            "autoWidth": true,
+            //是否显示表格左下角的信息
+            "info": true,
+            //是否允许用户改变表格每页显示的记录数
+            "lengthChange": false,
+            //是否允许开启排序
+            "ordering": false,
+            //是否开启本地分页
+            "paging": true,
+            //是否显示处理状态(排序的时候，数据很多耗费时间长的话，也会显示这个)
+            "processing": true,
+            // 是否允许 DataTables 开启本地搜索
+            "searching": false,
+            // 控制 DataTables 的延迟渲染，可以提高初始化的速度
+            "deferRender": true,
+            // 是否开启服务器模式
+            "serverSide": true,
+            "ajax": {
+                "url": url
+            },
+            // 分页按钮显示选项
+            "pagingType": "full_numbers",
+            // 设置列的数据源
+            "columns": columns,
+            // 表格重绘的回调函数
+            "drawCallback": function (settings) {
+                handlerInitCheckbox();
+                handlerCheckboxAll();
+            },
+            // 国际化
+            "language": {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
     }
 
     return {
@@ -156,7 +219,7 @@ var App = function () {
          * 初始化iCheck以及全选功能
          */
         init : function () {
-            handlerInit();
+            handlerInitCheckbox();
             handlerCheckboxAll();
         },
         deleteSingle : function (url, id, msg) {
@@ -164,6 +227,9 @@ var App = function () {
         },
         deleteMulti : function (url) {
             handlerDeleteMulti(url);
+        },
+        initDataTables : function (url, columns) {
+            handlerInitDataTables(url, columns);
         }
 
     }

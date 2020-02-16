@@ -1,6 +1,8 @@
 package com.wenwl.my.shop.web.admin.web.controller;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
+import com.wenwl.my.shop.commons.dto.PageInfo;
+import com.wenwl.my.shop.commons.persistence.BaseEntity;
 import com.wenwl.my.shop.domain.entity.TbUser;
 import com.wenwl.my.shop.web.admin.service.TbUserService;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wenwl
@@ -98,5 +104,26 @@ public class UserController {
             baseResult = BaseResult.fail("删除失败");
         }
         return baseResult;
+    }
+
+    @ResponseBody
+    @GetMapping(value = "page")
+    public PageInfo<TbUser> page(HttpServletRequest req){
+
+        String drawStr = req.getParameter("draw");
+        String startStr = req.getParameter("start");
+        String lengthStr = req.getParameter("length");
+
+        int draw = drawStr == null ? 0 : Integer.parseInt(drawStr);
+        int start = startStr == null ? 0 : Integer.parseInt(startStr);
+        int length = lengthStr == null ? 0 : Integer.parseInt(lengthStr);
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("page",start);
+        params.put("pageSize",length);
+        PageInfo<TbUser> pageInfo = userService.page(params);
+        pageInfo.setDraw(draw);
+        return pageInfo;
+
     }
 }

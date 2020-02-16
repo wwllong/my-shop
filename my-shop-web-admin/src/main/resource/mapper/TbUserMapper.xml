@@ -111,4 +111,16 @@
         </foreach>
     </delete>
 
+    <select id="page" parameterType="java.util.Map" resultType="TbUser" >
+        SELECT
+            <include refid="tbUserColumns"/>
+        FROM
+            tb_user AS a
+        limit #{page},#{pageSize}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tb_user AS a
+    </select>
+
 </mapper>

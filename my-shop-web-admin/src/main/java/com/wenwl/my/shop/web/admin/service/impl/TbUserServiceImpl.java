@@ -1,6 +1,8 @@
 package com.wenwl.my.shop.web.admin.service.impl;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
+import com.wenwl.my.shop.commons.dto.PageInfo;
+import com.wenwl.my.shop.commons.persistence.BaseEntity;
 import com.wenwl.my.shop.commons.utils.RegexpUtils;
 import com.wenwl.my.shop.domain.entity.TbUser;
 import com.wenwl.my.shop.web.admin.dao.TbUserDao;
@@ -12,6 +14,7 @@ import org.springframework.util.DigestUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wenwl
@@ -141,6 +144,36 @@ public class TbUserServiceImpl implements TbUserService {
     @Override
     public long deleteMulti(String[] ids) {
         return tbUserDao.deleteMulti(ids);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param params
+     * @return
+     */
+    @Override
+    public PageInfo<TbUser> page(Map<String, Object> params) {
+        PageInfo<TbUser> pageInfo = new PageInfo<>();
+
+        int count = tbUserDao.count();
+        List<TbUser> tbUsers = tbUserDao.page(params);
+
+        pageInfo.setRecordsTotal(count);
+        pageInfo.setRecordsFiltered(count);
+        pageInfo.setData(tbUsers);
+
+        return pageInfo;
+    }
+
+    /**
+     * 统计总记录数
+     *
+     * @return
+     */
+    @Override
+    public int count() {
+        return tbUserDao.count();
     }
 
     /**

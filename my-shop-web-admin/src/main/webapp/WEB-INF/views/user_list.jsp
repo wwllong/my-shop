@@ -45,10 +45,10 @@
                             <h3 class="box-title">用户列表</h3>
 
                             <div class="row" style="padding-left:12px; padding-top: 10px;">
-                                <a href="/user/form" class="btn btn-xs btn-default" type="button"><i class="fa fa-plus"></i> 新增</a>
-                                <button type="button" class="btn btn-xs btn-default" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
-                                <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-download"></i> 导入</a>
-                                <a href="#" class="btn btn-xs btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>
+                                <a href="/user/form" class="btn btn-sm btn-default" type="button"><i class="fa fa-plus"></i> 新增</a>
+                                <button type="button" class="btn btn-sm btn-default" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
+                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-download"></i> 导入</a>
+                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>
                             </div>
 
                             <div class="row">
@@ -78,7 +78,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover">
+                            <table id="dataTable" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" class="minimal checkbox-all" /></th>
@@ -91,21 +91,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${tbUsers}" var="tbUser">
-                                    <tr>
-                                        <td><input type="checkbox" class="minimal" value="${tbUser.id}" /></td>
-                                        <td>${tbUser.id}</td>
-                                        <td>${tbUser.username}</td>
-                                        <td>${tbUser.phone}</td>
-                                        <td>${tbUser.email}</td>
-                                        <td><fmt:formatDate value="${tbUser.updated}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                        <td>
-                                            <a href="#" class="btn btn-xs btn-primary" type="button"><i class="fa fa-search"></i> 查看</a>
-                                            <a href="#" class="btn btn-xs btn-warning" type="button"><i class="fa fa-edit"></i> 编辑</a>
-                                            <button class="btn btn-xs btn-danger" type="button" onclick="App.deleteSingle('/user/delete',${tbUser.id})"><i class="fa fa-trash-o"></i> 删除</button>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
@@ -131,6 +117,29 @@
         // 表单验证
         Validate.validateForm("inputForm");
 
+        let columns = [
+            {
+                "data": function (row, type, val, meta) {
+                    return '<input id="' + row.id + '" type="checkbox" class="minimal" />';
+                }
+            },
+            {"data": "id"},
+            {"data": "username"},
+            {"data": "phone"},
+            {"data": "email"},
+            {"data": "updated"},
+            {
+                "data": function (row, type, val, meta) {
+                    var deleteURL = "/user/delete";
+                    return '<a href="#" type="button" class="btn btn-sm btn-default"><i class="fa fa-search"></i> 查看</a>&nbsp;&nbsp;' +
+                        '<a href="#" type="button" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;' +
+                        '<a href="#" type="button" class="btn btn-sm btn-danger" onclick="App.deleteSingle(\'' + deleteURL + '\', \'' + row.id + '\')"><i class="fa fa-trash-o"></i> 删除</a>';
+
+                }
+            }
+        ];
+
+        App.initDataTables( "/user/page",columns);
     });
 </script>
 </body>

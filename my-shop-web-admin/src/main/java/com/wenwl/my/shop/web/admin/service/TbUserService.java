@@ -1,9 +1,11 @@
 package com.wenwl.my.shop.web.admin.service;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
+import com.wenwl.my.shop.commons.dto.PageInfo;
 import com.wenwl.my.shop.domain.entity.TbUser;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wenwl
@@ -66,5 +68,18 @@ public interface TbUserService {
      * @return
      */
     long deleteMulti(String[] ids);
+
+    /**
+     * 分页查询
+     * @param params
+     * @return
+     */
+    public PageInfo<TbUser> page(Map<String,Object> params);
+
+    /**
+     * 统计总记录数
+     * @return
+     */
+    public int count();
 
 }

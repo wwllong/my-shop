@@ -1,5 +1,6 @@
 package com.wenwl.my.shop.domain.entity;
 
+import com.wenwl.my.shop.commons.persistence.BaseEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,15 +14,12 @@ import java.util.Date;
  * @vserion 1.0.0
  */
 @Data
-public class TbUser implements Serializable {
+public class TbUser extends BaseEntity implements Serializable {
 
-    private Long id;
     private String username;
     private String password;
     private String phone;
     private String email;
-    private Date created;
-    private Date updated;
 
     private String rememberMe;
 
