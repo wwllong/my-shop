@@ -212,7 +212,22 @@ var App = function () {
                 }
             }
         });
-    }
+    };
+
+    /**
+     * 查看详情
+     */
+    let handlerShowDetail = function(url){
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: "html",
+            success: function (data) {
+                $("#modal-detail-body").html(data);
+                $("#modal-detail").modal("show");
+            }
+        });
+    };
 
     return {
         /**
@@ -230,6 +245,9 @@ var App = function () {
         },
         initDataTables : function (url, columns) {
             handlerInitDataTables(url, columns);
+        },
+        showDetail : function (url) {
+            handlerShowDetail(url);
         }
 
     }

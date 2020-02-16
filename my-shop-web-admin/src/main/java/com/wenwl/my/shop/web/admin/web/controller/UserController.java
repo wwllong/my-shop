@@ -47,13 +47,10 @@ public class UserController {
 
     /**
      * 跳转用户列表
-     * @param model
      * @return
      */
     @GetMapping(value = "list")
-    public String getList(Model model){
-        List<TbUser> tbUsers = userService.selectAll();
-        model.addAttribute("tbUsers",tbUsers);
+    public String getList(){
         return "user_list";
     }
 
@@ -126,4 +123,14 @@ public class UserController {
         return pageInfo;
 
     }
+
+    /**
+     * 返回用户详情
+     * @return
+     */
+    @GetMapping(value = "detail")
+    public String detail(){
+        return "user_detail";
+    }
+
 }

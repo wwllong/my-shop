@@ -33,3 +33,4 @@
 <!-- App -->
 <script src="/static/assets/js/app/validate.js"></script>
 <script src="/static/assets/js/app/app.js"></script>
+<script src="/static/assets/js/app/moment.min.js"></script>

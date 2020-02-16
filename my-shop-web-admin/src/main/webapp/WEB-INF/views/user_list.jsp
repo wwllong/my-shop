@@ -111,6 +111,7 @@
 <jsp:include page="../includes/footer.jsp" />
 <!-- 自定义模态框 -->
 <tags:modal_confirm />
+<tags:modal_detail />
 
 <script>
     $(function () {
@@ -127,20 +128,27 @@
             {"data": "username"},
             {"data": "phone"},
             {"data": "email"},
-            {"data": "updated"},
             {
                 "data": function (row, type, val, meta) {
+                    return moment(row.updated).format("YYYY-MM-DD HH:mm:ss");
+                    }
+            },
+            {
+                "data": function (row, type, val, meta) {
+                    var detailURL = "/user/detail?id="+row.id;
                     var deleteURL = "/user/delete";
-                    return '<a href="#" type="button" class="btn btn-sm btn-default"><i class="fa fa-search"></i> 查看</a>&nbsp;&nbsp;' +
-                        '<a href="#" type="button" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;' +
-                        '<a href="#" type="button" class="btn btn-sm btn-danger" onclick="App.deleteSingle(\'' + deleteURL + '\', \'' + row.id + '\')"><i class="fa fa-trash-o"></i> 删除</a>';
+                    return '<button type="button" class="btn btn-sm btn-default" onclick="App.showDetail(\''+detailURL+'\')"><i class="fa fa-search"></i> 查看</button>&nbsp;&nbsp;' +
+                        '<a href="/user/form?id='+row.id+'" type="button" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;' +
+                        '<button  type="button" class="btn btn-sm btn-danger" onclick="App.deleteSingle(\'' + deleteURL + '\', \'' + row.id + '\')"><i class="fa fa-trash-o"></i> 删除</button >';
 
                 }
             }
         ];
 
         App.initDataTables( "/user/page",columns);
+
     });
+
 </script>
 </body>
 </html>
