@@ -33,6 +33,7 @@
             <div class="row">
                 <div class="col-xs-12">
 
+                    <!-- 消息提示 -->
                     <c:if test="${baseResult.status != null}">
                         <div class="alert alert-${baseResult.status == 200 ? "success":"danger"} alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -40,7 +41,7 @@
                         </div>
                     </c:if>
 
-                    <div class="box">
+                    <div class="box box-info">
                         <div class="box-header">
                             <h3 class="box-title">用户列表</h3>
 
@@ -51,6 +52,7 @@
 <%--                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>--%>
                             </div>
 
+                            <!-- 搜索条件 -->
                             <div class="row">
                                 <from class="navbar-form">
                                     <div class="form-group input-group-sm">

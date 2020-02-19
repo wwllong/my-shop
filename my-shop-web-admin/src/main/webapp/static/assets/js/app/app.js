@@ -10,6 +10,13 @@ var App = function () {
     // 删除的id 数组
     let _idArray;
 
+    // treeTable 初始化
+    let treeTableOpts = {
+        theme : "vsStyle",
+        expandLevel : 2,
+        column : 0
+    };
+
     /**
      * 激活iCheck，初始化iCheck
      */
@@ -238,6 +245,14 @@ var App = function () {
     let handlerSearch = function (dataTable,param) {
         dataTable.settings()[0].ajax.data = param;
         dataTable.ajax.reload();
+    };
+
+    /**
+     * treeTable初始化
+     */
+    let handlerInitTreeTable = function (tableId, opts) {
+        opts = $.extend(treeTableOpts,opts);
+        $("#"+tableId).treeTable(opts);
     }
 
     return {
@@ -287,6 +302,14 @@ var App = function () {
          */
         search : function (dataTable,param) {
             handlerSearch(dataTable,param);
+        },
+        /**
+         * treeTable初始化
+         * @param tableId
+         * @param opts
+         */
+        initTreeTable : function (tableId, opts) {
+            handlerInitTreeTable(tableId,opts);
         }
 
     }

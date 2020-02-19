@@ -9,11 +9,17 @@ import java.util.Map;
 /**
  * @author wenwl
  * @className TbUserDao
+ * @dsecription 用户数据访问对象
  * @data 2020/1/16
  * @vserion 1.0.0
  */
 @Repository
 public interface TbUserDao {
+
+    /**
+     * 查询所有列表
+     */
+    public List<TbUser> selectAll();
 
     /**
      * 插入一条用户信息

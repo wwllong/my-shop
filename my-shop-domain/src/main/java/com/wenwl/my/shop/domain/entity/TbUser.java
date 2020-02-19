@@ -19,10 +19,22 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 public class TbUser extends BaseEntity{
 
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * 密码
+     */
     @JsonIgnore
     private String password;
+    /**
+     * 电话
+     */
     private String phone;
+    /**
+     * 邮箱
+     */
     private String email;
 
     /**

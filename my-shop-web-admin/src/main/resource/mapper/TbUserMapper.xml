@@ -12,6 +12,13 @@
         a.updated
     </sql>
 
+    <select id="selectAll" resultType="TbUser">
+        SELECT
+        <include refid="tbUserColumns"/>
+        FROM
+        tb_user AS a
+    </select>
+
     <insert id="insert">
         INSERT INTO tb_user (
             id,
