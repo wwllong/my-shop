@@ -2,8 +2,8 @@ package com.wenwl.my.shop.web.admin.web.controller;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.commons.dto.PageInfo;
-import com.wenwl.my.shop.domain.entity.TbUser;
-import com.wenwl.my.shop.web.admin.service.TbUserService;
+import com.wenwl.my.shop.domain.entity.TbContent;
+import com.wenwl.my.shop.web.admin.service.TbContentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,33 +13,32 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author wenwl
- * @className UserController
+ * @className ContentController
  * @data 2020/1/30
  * @vserion 1.0.0
  */
 @Controller
-@RequestMapping(value = "user")
-public class UserController {
+@RequestMapping(value = "content")
+public class ContentController {
 
     @Autowired
-    private TbUserService userService;
+    private TbContentService contentService;
 
     @ModelAttribute
-    public TbUser getTbUser(Long id){
-        TbUser tbUser = null;
+    public TbContent getTbContent(Long id){
+        TbContent tbContent = null;
 
         if(id != null){
-            tbUser = userService.getById(id);
+            tbContent = contentService.getById(id);
         }
         else {
-            tbUser = new TbUser();
+            tbContent = new TbContent();
         }
 
-        return tbUser;
+        return tbContent;
     }
 
     /**
@@ -48,7 +47,7 @@ public class UserController {
      */
     @GetMapping(value = "list")
     public String getList(){
-        return "user_list";
+        return "content_list";
     }
 
     /**
@@ -57,19 +56,19 @@ public class UserController {
      */
     @GetMapping(value = "form")
     public String form(){
-        return "user_form";
+        return "content_form";
     }
 
     @PostMapping(value = "save")
-    public String save(TbUser tbUser, RedirectAttributes redirectAttributes,Model model){
-        BaseResult baseResult = userService.save(tbUser);
+    public String save(TbContent tbContent, RedirectAttributes redirectAttributes,Model model){
+        BaseResult baseResult = contentService.save(tbContent);
 
         if(BaseResult.STATUS_SUCCESS == baseResult.getStatus()){
             redirectAttributes.addFlashAttribute("baseResult",baseResult);
-            return "redirect:/user/list";
+            return "redirect:/content/list";
         }else{
             model.addAttribute("baseResult",baseResult);
-            return "user_form";
+            return "content_form";
         }
     }
 
@@ -79,7 +78,7 @@ public class UserController {
         BaseResult baseResult = null;
         if(StringUtils.isNotBlank(ids)){
             String[] idArray = ids.split(",");
-            userService.deleteMulti(idArray);
+            contentService.deleteMulti(idArray);
             baseResult = BaseResult.success("删除成功");
         }else{
             baseResult = BaseResult.fail("删除失败");
@@ -89,7 +88,7 @@ public class UserController {
 
     @ResponseBody
     @GetMapping(value = "page")
-    public PageInfo<TbUser> page(HttpServletRequest req,TbUser tbUser){
+    public PageInfo<TbContent> page(HttpServletRequest req,TbContent tbContent){
 
         String drawStr = req.getParameter("draw");
         String startStr = req.getParameter("start");
@@ -102,8 +101,8 @@ public class UserController {
         HashMap<String, Object> params = new HashMap<>();
         params.put("page",start);
         params.put("pageSize",length);
-        params.put("tbUser",tbUser);
-        PageInfo<TbUser> pageInfo = userService.page(params);
+        params.put("tbContent",tbContent);
+        PageInfo<TbContent> pageInfo = contentService.page(params);
         pageInfo.setDraw(draw);
         return pageInfo;
 
@@ -115,7 +114,7 @@ public class UserController {
      */
     @GetMapping(value = "detail")
     public String detail(){
-        return "user_detail";
+        return "content_detail";
     }
 
 }

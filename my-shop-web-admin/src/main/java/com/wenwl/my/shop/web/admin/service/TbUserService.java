@@ -44,11 +44,6 @@ public interface TbUserService {
     TbUser login(String email, String password);
 
     /**
-     * 搜索
-     */
-    List<TbUser> search(TbUser tbUser);
-
-    /**
      * 批量删除
      * @param ids
      * @return

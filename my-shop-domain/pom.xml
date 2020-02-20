@@ -18,11 +18,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.wenwl</groupId>
             <artifactId>my-shop-commons</artifactId>
             <version>${parent.version}</version>

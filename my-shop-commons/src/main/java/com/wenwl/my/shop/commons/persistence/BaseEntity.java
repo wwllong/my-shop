@@ -1,5 +1,7 @@
 package com.wenwl.my.shop.commons.persistence;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ import java.util.Date;
  * @data 2020/2/16
  * @vserion 1.0.0
  */
+@Data
 public class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -6153861510214010832L;
@@ -18,27 +21,4 @@ public class BaseEntity implements Serializable {
     private Date created;
     private Date updated;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 }

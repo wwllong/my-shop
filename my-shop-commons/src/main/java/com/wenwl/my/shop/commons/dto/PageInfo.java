@@ -1,6 +1,7 @@
 package com.wenwl.my.shop.commons.dto;
 
 import com.wenwl.my.shop.commons.persistence.BaseEntity;
+import lombok.Data;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @data 2020/2/16
  * @vserion 1.0.0
  */
+@Data
 public class PageInfo<T extends BaseEntity> {
 
     /**
@@ -34,43 +36,4 @@ public class PageInfo<T extends BaseEntity> {
      */
     private String error;
 
-    public int getDraw() {
-        return draw;
-    }
-
-    public void setDraw(int draw) {
-        this.draw = draw;
-    }
-
-    public int getRecordsTotal() {
-        return recordsTotal;
-    }
-
-    public void setRecordsTotal(int recordsTotal) {
-        this.recordsTotal = recordsTotal;
-    }
-
-    public int getRecordsFiltered() {
-        return recordsFiltered;
-    }
-
-    public void setRecordsFiltered(int recordsFiltered) {
-        this.recordsFiltered = recordsFiltered;
-    }
-
-    public List<T> getData() {
-        return data;
-    }
-
-    public void setData(List<T> data) {
-        this.data = data;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
 }

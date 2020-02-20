@@ -1,5 +1,7 @@
 package com.wenwl.my.shop.commons.dto;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @data 2020/2/4
  * @vserion 1.0.0
  */
+@Data
 public class BaseResult implements Serializable {
 
     public static final int STATUS_SUCCESS = 200;
@@ -39,22 +42,6 @@ public class BaseResult implements Serializable {
 
     public static BaseResult fail(String message){
         return BaseResult.createResult(STATUS_FAIL,message);
-    }
-
-    public int getStatus() {
-        return status;
-    } 
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     private static BaseResult createResult(int status, String message){

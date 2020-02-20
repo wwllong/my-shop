@@ -1,6 +1,6 @@
 package com.wenwl.my.shop.web.admin.dao;
 
-import com.wenwl.my.shop.domain.entity.TbUser;
+import com.wenwl.my.shop.domain.entity.TbContent;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,50 +8,43 @@ import java.util.Map;
 
 /**
  * @author wenwl
- * @className TbUserDao
- * @dsecription 用户数据访问对象
- * @data 2020/1/16
+ * @className TbContentDao
+ * @dsecription 内容数据访问对象
+ * @data 2020/2/20
  * @vserion 1.0.0
  */
 @Repository
-public interface TbUserDao {
+public interface TbContentDao {
 
     /**
      * 查询所有列表
      */
-    public List<TbUser> selectAll();
+    public List<TbContent> selectAll();
 
     /**
-     * 插入一条用户信息
+     * 插入一条内容信息
      * @return
      */
-    public int insert(TbUser tbUser);
+    public int insert(TbContent tbContent);
 
     /**
-     * 删除用户Id
+     * 删除内容Id
      */
-    public int delete(TbUser tbUser);
+    public int delete(TbContent tbContent);
 
     /**
      * 查询单个对象
      * @param id
      * @return
      */
-    public TbUser getById(Long id);
+    public TbContent getById(Long id);
 
     /**
      * 更新
-     * @param tbUser
+     * @param tbContent
      * @return
      */
-    public int update(TbUser tbUser);
-
-    /**
-     * 根据邮箱查询
-     * @param email
-     * @return
-     */
-    public TbUser getByEmail(String email);
+    public int update(TbContent tbContent);
 
     /**
      * 批量删除
@@ -65,11 +58,11 @@ public interface TbUserDao {
      * @param params
      * @return
      */
-    public List<TbUser> page(Map<String,Object> params);
+    public List<TbContent> page(Map<String, Object> params);
 
     /**
      * 统计总记录数
      * @return
      */
-    public int count(TbUser tbUser);
+    public int count(TbContent tbContent);
 }
