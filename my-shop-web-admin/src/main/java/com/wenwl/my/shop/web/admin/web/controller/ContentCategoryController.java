@@ -5,8 +5,7 @@ import com.wenwl.my.shop.web.admin.service.TbContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,15 @@ public class ContentCategoryController {
                 }
             }
         }
+    }
 
+    @ResponseBody
+    @PostMapping("tree/data")
+    public List<TbContentCategory> treeData(Long id){
+        if(id == null){
+            id = 0L;
+        }
+        return contentCategoryService.selectByPid(id);
     }
 
 

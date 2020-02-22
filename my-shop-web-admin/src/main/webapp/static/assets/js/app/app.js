@@ -10,12 +10,26 @@ var App = function () {
     // 删除的id 数组
     let _idArray;
 
-    // treeTable 初始化
+    // treeTable 初始化默认配置
     let treeTableOpts = {
         theme : "vsStyle",
         expandLevel : 2,
         column : 0
     };
+
+    // treeTable 初始化默认配置
+    let zTreeOpts = {
+        zTreeId: "myTree",
+        view: {
+            selectedMulti: false
+        },
+        async: {
+            enable: true,
+            url:"",
+            autoParam:["id", "name=n", "level=lv"],
+            otherParam:{}
+        }
+    }
 
     /**
      * 激活iCheck，初始化iCheck
@@ -253,7 +267,26 @@ var App = function () {
     let handlerInitTreeTable = function (tableId, opts) {
         opts = $.extend(treeTableOpts,opts);
         $("#"+tableId).treeTable(opts);
-    }
+    };
+
+    /**
+     * zTree初始化
+     */
+    let handlerInitZTree = function (opts, callback) {
+        opts = $.extend(true,zTreeOpts,opts);
+        opts.async = $.extend(zTreeOpts.async,opts.async);
+        let _treeId = "#"+opts.zTreeId;
+        $.fn.zTree.init($(_treeId),opts);
+        $("#btn-modal-ok").bind("click",function () {
+            let zTree = $.fn.zTree.getZTreeObj(opts.zTreeId);
+            let nodes = zTree.getSelectedNodes();
+            if (nodes.length == 0) {
+                alert("请先选择一个节点");
+            }else{
+                callback(nodes);
+            }
+        });
+    };
 
     return {
         /**
@@ -310,6 +343,26 @@ var App = function () {
          */
         initTreeTable : function (tableId, opts) {
             handlerInitTreeTable(tableId,opts);
+        },
+        /**
+         * 配置方式初始化ZTree
+         * @param opts
+         * @param callback
+         */
+        initZTree : function (opts, callback) {
+            handlerInitZTree(opts, callback);
+        },
+        /**
+         * 快速初始化ZTree
+         * @param url
+         * @param callback
+         */
+        quickInitZTree : function (url, callback) {
+            handlerInitZTree({
+                async: {
+                    url:url
+                }
+            }, callback);
         }
 
     }

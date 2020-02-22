@@ -31,4 +31,15 @@ public class TbContentCategoryImpl implements TbContentCategoryService {
         return tbContentCategoryDao.selectAll();
     }
 
+    /**
+     * 根据父节点ID返回列表
+     *
+     * @param parentId
+     * @return
+     */
+    @Override
+    public List<TbContentCategory> selectByPid(Long parentId) {
+        return tbContentCategoryDao.selectByPid(parentId);
+    }
+
 }

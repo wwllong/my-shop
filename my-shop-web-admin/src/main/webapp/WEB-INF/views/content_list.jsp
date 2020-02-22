@@ -135,17 +135,17 @@
             {"data": "titleDesc"},
             {
                 "data": function (row, type, val, meta) {
-                    return initALabel(row.url);
+                    return initViewLabel(row.url);
                 }
             },
             {
                 "data": function (row, type, val, meta) {
-                    return initALabel(row.pic);
+                    return initViewLabel(row.pic);
                 }
             },
             {
                 "data": function (row, type, val, meta) {
-                    return initALabel(row.pic2);
+                    return initViewLabel(row.pic2);
                 }
             },
             {
@@ -181,7 +181,7 @@
     });
 
     // 超链接-查看 初始化
-    function initALabel(href){
+    function initViewLabel(href){
         if (href == null) {
             return '';
         }

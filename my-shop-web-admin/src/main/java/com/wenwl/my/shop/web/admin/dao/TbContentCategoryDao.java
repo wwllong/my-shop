@@ -21,4 +21,10 @@ public interface TbContentCategoryDao {
      */
     public List<TbContentCategory> selectAll();
 
+    /**
+     * 根据父节点ID返回列表
+     * @return
+     */
+    public List<TbContentCategory> selectByPid(Long parentId);
+
 }
