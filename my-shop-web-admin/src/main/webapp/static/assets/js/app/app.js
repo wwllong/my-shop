@@ -29,7 +29,7 @@ var App = function () {
             autoParam:["id", "name=n", "level=lv"],
             otherParam:{}
         }
-    }
+    };
 
     /**
      * 激活iCheck，初始化iCheck

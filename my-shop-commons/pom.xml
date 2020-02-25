@@ -64,6 +64,14 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <!-- Hibernate Validator Start-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
+        </dependency>
+        <!-- Hibernate Validator End-->
+
     </dependencies>
 
 </project>
