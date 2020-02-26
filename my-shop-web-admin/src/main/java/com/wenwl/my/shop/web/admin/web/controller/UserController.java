@@ -28,6 +28,11 @@ public class UserController {
     @Autowired
     private TbUserService userService;
 
+    /**
+     * 回显数据
+     * @param id
+     * @return
+     */
     @ModelAttribute
     public TbUser getTbUser(Long id){
         TbUser tbUser = null;
@@ -60,6 +65,13 @@ public class UserController {
         return "user_form";
     }
 
+    /**
+     * 保存用户
+     * @param tbUser
+     * @param redirectAttributes
+     * @param model
+     * @return
+     */
     @PostMapping(value = "save")
     public String save(TbUser tbUser, RedirectAttributes redirectAttributes,Model model){
         BaseResult baseResult = userService.save(tbUser);
@@ -73,6 +85,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
     @ResponseBody
     @PostMapping(value = "delete")
     public BaseResult delete(String ids){
@@ -87,6 +104,12 @@ public class UserController {
         return baseResult;
     }
 
+    /**
+     * 分页查询
+     * @param req
+     * @param tbUser
+     * @return
+     */
     @ResponseBody
     @GetMapping(value = "page")
     public PageInfo<TbUser> page(HttpServletRequest req,TbUser tbUser){

@@ -45,14 +45,14 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form:form id="inputForm" cssClass="form-horizontal" action="/content/category/save" method="post" modelAttribute="tbContentGategory">
+                        <form:form id="inputForm" cssClass="form-horizontal" action="/content/category/save" method="post" modelAttribute="tbContentCategory">
                             <form:hidden path="id" />
                             <div class="box-body">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">父级类目</label>
 
                                     <div class="col-sm-10">
-                                        <form:hidden path="categoryId"/>
+                                        <form:hidden path="parentId"/>
                                         <input id="categoryName" class="form-control required" placeholder="请选择" readonly="true" data-toggle="modal" data-target="#modal-confirm" />
                                     </div>
                                 </div>
@@ -74,17 +74,24 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="titleDesc" class="col-sm-2 control-label">标题描述</label>
-
-                                    <div class="col-sm-10">
-                                        <form:input path="titleDesc" class="form-control required" placeholder="标题描述" />
+                                    <label class="col-sm-2 control-label">否为父类目</label>
+                                    <div class="col-sm-1">
+                                        <label>
+                                            <form:radiobutton path="isParent" cssClass="minimal" value="1" checked="true"/> 是
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label>
+                                            <form:radiobutton path="isParent" cssClass="minimal" value="0"/> 否
+                                        </label>
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="box-footer">
                                 <button type="button" class="btn btn-default" onclick="history.go(-1);">返回</button>
-                                <button id="btnSubmit" type="submit" class="btn btn-info pull-right">提交</button>
+                                <button type="submit" class="btn btn-info pull-right">提交</button>
                             </div>
                         </form:form>
                     </div>
@@ -106,12 +113,18 @@
 
         App.quickInitZTree("/content/category/tree/data",function (nodes) {
             let node = nodes[0];
-            $("#categoryId").val(node.id);
+            $("#parentId").val(node.id);
             $("#categoryName").val(node.name);
             $("#modal-confirm").modal("hide");
         });
 
     });
+
+    function test1() {
+        var radio = $('input:radio[name=isParent]:checked').val();
+        console.log(radio);
+        return false;
+    }
 
 </script>
 </body>

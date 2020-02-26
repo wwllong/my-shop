@@ -16,6 +16,19 @@ import java.util.List;
 public interface TbContentCategoryDao {
 
     /**
+     * 插入内容分类
+     * @return
+     */
+    public int insert(TbContentCategory tbContentCategory);
+
+    /**
+     * 更新内容分类
+     * @param tbContentCategory
+     * @return
+     */
+    public int update(TbContentCategory tbContentCategory);
+
+    /**
      * 查询列表
      * @return
      */
@@ -26,5 +39,11 @@ public interface TbContentCategoryDao {
      * @return
      */
     public List<TbContentCategory> selectByPid(Long parentId);
+
+    /**
+     * 根据id查询内容分类
+     * @return
+     */
+    public TbContentCategory getById(Long id);
 
 }

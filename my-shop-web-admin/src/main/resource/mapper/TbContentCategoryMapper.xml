@@ -12,6 +12,46 @@
         a.updated
     </sql>
 
+    <insert id="insert">
+        INSERT INTO tb_content_category (
+            id,
+            parent_id,
+            name,
+            status,
+            sort_order,
+            is_parent,
+            created,
+            updated
+        )
+        VALUES
+            (
+                #{id},
+                #{parentId},
+                #{name},
+                #{status},
+                #{sortOrder},
+                #{isParent},
+                #{created},
+                #{updated}
+            )
+    </insert>
+
+    <update id="update">
+        UPDATE
+          tb_content_category
+        SET
+            id = #{id},
+            parent_id = #{parentId},
+            name = #{name},
+            status =  #{status},
+            sort_order = #{sortOrder},
+            is_parent = #{isParent},
+            created = #{created},
+            updated = #{updated}
+        WHERE
+            id = #{id}
+    </update>
+
     <select id="selectAll" resultType="TbContentCategory">
         SELECT
             <include refid="tbContentCategory"/>
@@ -26,6 +66,15 @@
         FROM
            tb_content_category AS a
         WHERE a.parent_id = #{parentId}
+    </select>
+
+    <select id="getById" resultType="TbContentCategory">
+        SELECT
+        <include refid="tbContentCategory"/>
+        FROM
+            tb_content_category AS a
+        WHERE
+            a.id = #{id}
     </select>
 
 </mapper>

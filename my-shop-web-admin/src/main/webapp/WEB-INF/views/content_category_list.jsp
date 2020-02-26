@@ -47,7 +47,7 @@
                             <h3 class="box-title">内容分类</h3>
 
                             <div class="row" style="padding-left:12px; padding: 10px;">
-                                <a href="/user/form" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus"></i> 新增</a>
+                                <a href="/content/category/form" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus"></i> 新增</a>
                                 <button type="button" class="btn btn-sm btn-danger" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                         <td>${tbContentCategory.name}</td>
                                         <td>${tbContentCategory.sortOrder}</td>
                                         <td>
-                                            <a href="#" type="button" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> 编辑</a>
+                                            <a href="/content/category/form?id=${tbContentCategory.id}" type="button" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> 编辑</a>
                                             <button  type="button" class="btn btn-sm btn-danger" ><i class="fa fa-trash-o"></i> 删除</button >
                                             <a href="#" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus"></i> 新增下级菜单</a>
                                         </td>

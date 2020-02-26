@@ -27,6 +27,11 @@ public class ContentController {
     @Autowired
     private TbContentService contentService;
 
+    /**
+     * 回显数据
+     * @param id
+     * @return
+     */
     @ModelAttribute
     public TbContent getTbContent(Long id){
         TbContent tbContent = null;
@@ -42,7 +47,7 @@ public class ContentController {
     }
 
     /**
-     * 跳转用户列表
+     * 跳转内容列表
      * @return
      */
     @GetMapping(value = "list")
@@ -51,7 +56,7 @@ public class ContentController {
     }
 
     /**
-     * 跳转新增用户
+     * 跳转新增内容
      * @return
      */
     @GetMapping(value = "form")
@@ -59,6 +64,13 @@ public class ContentController {
         return "content_form";
     }
 
+    /**
+     * 保存内容
+     * @param tbContent
+     * @param redirectAttributes
+     * @param model
+     * @return
+     */
     @PostMapping(value = "save")
     public String save(TbContent tbContent, RedirectAttributes redirectAttributes,Model model){
         BaseResult baseResult = contentService.save(tbContent);
@@ -72,6 +84,11 @@ public class ContentController {
         }
     }
 
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
     @ResponseBody
     @PostMapping(value = "delete")
     public BaseResult delete(String ids){
@@ -86,6 +103,12 @@ public class ContentController {
         return baseResult;
     }
 
+    /**
+     * 分页查询
+     * @param req
+     * @param tbContent
+     * @return
+     */
     @ResponseBody
     @GetMapping(value = "page")
     public PageInfo<TbContent> page(HttpServletRequest req,TbContent tbContent){

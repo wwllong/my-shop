@@ -116,7 +116,7 @@
 
                             <div class="box-footer">
                                 <button type="button" class="btn btn-default" onclick="history.go(-1);">返回</button>
-                                <button id="btnSubmit" type="submit" class="btn btn-info pull-right">提交</button>
+                                <button type="submit" class="btn btn-info pull-right">提交</button>
                             </div>
                         </form:form>
                     </div>
