@@ -182,10 +182,10 @@
 
     // 超链接-查看 初始化
     function initViewLabel(href){
-        if (href == null) {
-            return '';
+        if (!!href) {
+            return '<a href="' + href + '" target="_blank">查看</a>';
         }
-        return '<a href="' + href + '" target="_blank">查看</a>';
+       return '';
     }
 </script>
 </body>

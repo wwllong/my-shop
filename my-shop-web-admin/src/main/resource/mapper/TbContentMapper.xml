@@ -44,6 +44,7 @@
                 #{title},
                 #{subTitle},
                 #{titleDesc},
+                #{url},
                 #{pic},
                 #{pic2},
                 #{content},

@@ -31,6 +31,26 @@ var App = function () {
         }
     };
 
+    // dropzone 初始化默认配置
+    let dropzoneOpts = {
+        url: "", // 文件提交地址
+        method: "post",  // 也可用put
+        paramName: "dropzoneFile", // 默认为file
+        maxFiles: 1,// 一次性上传的文件数量上限
+        maxFilesize: 10, // 文件大小，单位：MB
+        acceptedFiles: ".jpg,.gif,.png,.jpeg", // 上传的类型
+        addRemoveLinks: true,
+        parallelUploads: 1,// 一次上传的文件数量
+        dictDefaultMessage: '拖动文件至此或者点击上传',
+        dictMaxFilesExceeded: "您最多只能上传1个文件！",
+        dictResponseError: '文件上传失败!',
+        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg。",
+        dictFallbackMessage: "浏览器不受支持",
+        dictFileTooBig: "文件过大上传文件最大支持!",
+        dictRemoveFile:"删除",
+        dictCancelUpload: "取消"
+    };
+
     /**
      * 激活iCheck，初始化iCheck
      */
@@ -288,6 +308,17 @@ var App = function () {
         });
     };
 
+    /**
+     * dropzone初始化
+     */
+    let handlerInitDropzone = function (opts) {
+        Dropzone.autoDiscover = false;
+        opts = $.extend(true,dropzoneOpts,opts);
+        for(let i = 0,len = opts.ids.length; i < len; i++){
+            new Dropzone(opts.ids[i], opts);
+        }
+    };
+
     return {
         /**
          * 初始化iCheck以及全选功能
@@ -363,6 +394,13 @@ var App = function () {
                     url:url
                 }
             }, callback);
+        },
+        /**
+         * 初始化dropzone
+         * @param opts
+         */
+        initDropzone : function (opts) {
+            handlerInitDropzone(opts);
         }
 
     }

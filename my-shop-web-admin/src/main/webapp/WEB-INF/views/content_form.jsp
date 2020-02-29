@@ -10,6 +10,9 @@
     <title>我的商城 | 内容管理</title>
     <jsp:include page="../includes/header.jsp" />
     <link rel="stylesheet" href="/static/assets/plugins/jquery-ztree/css/zTreeStyle/zTreeStyle.min.css" />
+    <link rel="stylesheet" href="/static/assets/plugins/dropzone/min/dropzone.min.css" />
+    <link rel="stylesheet" href="/static/assets/plugins/dropzone/min/basic.min.css" />
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -94,6 +97,7 @@
 
                                     <div class="col-sm-10">
                                         <form:input path="pic" class="form-control" placeholder="图片1" />
+                                        <div id="picDropzone" data-input="#pic" class="dropzone"></div>
                                     </div>
                                 </div>
 
@@ -102,6 +106,7 @@
 
                                     <div class="col-sm-10">
                                         <form:input path="pic2" class="form-control" placeholder="图片2" />
+                                        <div id="pic2Dropzone" data-input="#pic2" class="dropzone"></div>
                                     </div>
                                 </div>
 
@@ -132,6 +137,7 @@
 
 <jsp:include page="../includes/footer.jsp" />
 <script src="/static/assets/plugins/jquery-ztree/js/jquery.ztree.core-3.5.min.js"></script>
+<script src="/static/assets/plugins/dropzone/min/dropzone.min.js"></script>
 
 <script>
     $(function (){
@@ -143,6 +149,25 @@
             $("#modal-confirm").modal("hide");
         });
 
+    });
+
+    // 初始化图片上传
+    App.initDropzone({
+        ids : ["#picDropzone","#pic2Dropzone"],
+        url : "/upload",
+        init: function () {
+            // 上传成功触发的事件
+            this.on("success", function (file, data) {
+                let id = this.element.getAttribute("data-input");
+                $(id).val(data.url);
+            });
+            this.on("removedfile", function (file) {
+                if(file.status === "success"){
+                    let id = this.element.getAttribute("data-input");
+                    $(id).val("");
+                }
+            });
+        }
     });
 
 </script>

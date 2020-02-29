@@ -2,6 +2,7 @@ package com.wenwl.my.shop.web.admin.service.impl;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.commons.dto.PageInfo;
+import com.wenwl.my.shop.commons.utils.BeanValidator;
 import com.wenwl.my.shop.commons.utils.RegexpUtils;
 import com.wenwl.my.shop.domain.entity.TbContent;
 import com.wenwl.my.shop.web.admin.dao.TbContentDao;
@@ -35,11 +36,15 @@ public class TbContentServiceImpl implements TbContentService {
      */
     @Override
     public BaseResult save(TbContent tbContent) {
-        BaseResult baseResult = checkTbContent(tbContent);
 
-        if(BaseResult.STATUS_SUCCESS == baseResult.getStatus()){
+        String validator = BeanValidator.validator(tbContent);
+        //验证不通过
+        if(validator != null){
+            return BaseResult.fail(validator);
+        }
+        //验证通过
+        else{
             tbContent.setUpdated(new Date());
-
             //新增内容
             if(tbContent.getId() == null){
                 tbContent.setCreated(new Date());
@@ -49,11 +54,9 @@ public class TbContentServiceImpl implements TbContentService {
             else{
                 tbContentDao.update(tbContent);
             }
-
-            baseResult.setMessage("保存信息成功");
+            return BaseResult.success("保存内容信息成功");
         }
 
-        return baseResult;
     }
 
     /**
@@ -117,20 +120,6 @@ public class TbContentServiceImpl implements TbContentService {
     @Override
     public int count(TbContent tbContent) {
         return tbContentDao.count(tbContent);
-    }
-
-    /**
-     * 内容信息的有效检验
-     * @param tbContent
-     */
-    private BaseResult checkTbContent(TbContent tbContent){
-        BaseResult baseResult = BaseResult.success();
-
-        if(!RegexpUtils.checkEmail(tbContent.getContent())) {
-            baseResult = BaseResult.fail("内容不能为空，请重新输入");
-        }
-
-        return baseResult;
     }
 
 }
