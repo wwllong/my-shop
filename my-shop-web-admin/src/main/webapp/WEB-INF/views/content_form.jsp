@@ -55,8 +55,8 @@
                                     <label class="col-sm-2 control-label">父级类目</label>
 
                                     <div class="col-sm-10">
-                                        <form:hidden path="categoryId"/>
-                                        <input id="categoryName" class="form-control required" placeholder="请选择" readonly="true" data-toggle="modal" data-target="#modal-confirm" />
+                                        <form:hidden id="categoryId" path="tbContentCategory.id"/>
+                                        <input id="categoryName" class="form-control required" placeholder="请选择" readonly="true" data-toggle="modal" data-target="#modal-confirm" value="${tbContent.tbContentCategory.name}" />
                                     </div>
                                 </div>
 

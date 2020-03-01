@@ -4,7 +4,6 @@
 
     <sql id="tbContentColumns">
         a.id,
-        a.category_id,
         a.title,
         a.sub_title,
         a.title_desc,
@@ -13,7 +12,13 @@
         a.pic2,
         a.content,
         a.created,
-        a.updated
+        a.updated,
+        b.name AS `tbContentCategory.name`,
+        b.id AS `tbContentCategory.id`
+    </sql>
+
+    <sql id="tbContentJoins">
+        LEFT JOIN tb_content_category AS b ON a.category_id = b.id
     </sql>
 
     <select id="selectAll" resultType="TbContent">
@@ -21,6 +26,7 @@
         <include refid="tbContentColumns"/>
         FROM
         tb_content AS a
+        <include refid="tbContentJoins" />
     </select>
 
     <insert id="insert">
@@ -40,7 +46,7 @@
         VALUES
             (
                 #{id},
-                #{categoryId},
+                #{tbContentCategory.id},
                 #{title},
                 #{subTitle},
                 #{titleDesc},
@@ -62,6 +68,7 @@
             <include refid="tbContentColumns"/>
         FROM
           tb_content AS a
+        <include refid="tbContentJoins" />
         WHERE
           a.id = #{id}
     </select>
@@ -70,7 +77,7 @@
         UPDATE
           tb_content
         SET
-            category_id =  #{categoryId},
+            category_id =  #{tbContentCategory.id},
             title = #{title},
             sub_title = #{subTitle},
             title_desc = #{titleDesc},
@@ -97,6 +104,7 @@
             <include refid="tbContentColumns"/>
         FROM
             tb_content AS a
+        <include refid="tbContentJoins" />
         <where>
             <if test="tbContent.title != null and tbContent.title != ''" >
                 AND a.title LIKE CONCAT ('%', #{tbContent.title}, '%')
