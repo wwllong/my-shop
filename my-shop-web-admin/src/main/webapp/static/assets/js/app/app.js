@@ -51,6 +51,15 @@ var App = function () {
         dictCancelUpload: "取消"
     };
 
+    // wangEditor 默认配置
+    let wangEditorOpts = {
+        id: "#editor",
+        uploadImgServer: "/upload",
+        uploadFileName: "editorFile",
+        uploadImgMaxSize: 10 * 1024 * 1024,
+        uploadImgMaxLength: 1
+    };
+
     /**
      * 激活iCheck，初始化iCheck
      */
@@ -315,8 +324,27 @@ var App = function () {
         Dropzone.autoDiscover = false;
         opts = $.extend(true,dropzoneOpts,opts);
         for(let i = 0,len = opts.ids.length; i < len; i++){
-            new Dropzone(opts.ids[i], opts);
+            let dropzone = new Dropzone(opts.ids[i], opts);
         }
+    };
+
+    /**
+     * wangEditor初始化
+     */
+    let handlerInitWangEditor = function (opts) {
+        opts = $.extend(true,wangEditorOpts,opts);
+        let E = window.wangEditor;
+        let editor = new E(opts.id);
+        // 或者 var editor = new E( document.getElementById('editor') )
+        // 配置服务器端地址
+        editor.customConfig.uploadImgServer = opts.uploadImgServer;
+        editor.customConfig.uploadFileName = opts.uploadFileName;
+        // 将图片大小限制为 10M
+        editor.customConfig.uploadImgMaxSize = opts.uploadImgMaxSize;
+        // 限制一次最多能传1张图片
+        editor.customConfig.uploadImgMaxLength = opts.uploadImgMaxLength;
+        editor.create();
+        return editor;
     };
 
     return {
@@ -401,6 +429,13 @@ var App = function () {
          */
         initDropzone : function (opts) {
             handlerInitDropzone(opts);
+        },
+        /**
+         * 初始化wangEditor
+         * @param opts
+         */
+        initWangEditor : function (opts) {
+            return handlerInitWangEditor(opts);
         }
 
     }

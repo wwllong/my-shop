@@ -112,16 +112,16 @@
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">详情</label>
-
-                                    <div class="col-sm-10">
-                                        <form:input path="content" />
+                                    <form:hidden path="content" />
+                                    <div id="editor" class="col-sm-10">
+                                        ${tbContent.content}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="box-footer">
                                 <button type="button" class="btn btn-default" onclick="history.go(-1);">返回</button>
-                                <button type="submit" class="btn btn-info pull-right">提交</button>
+                                <button type="submit" id="submitBut" class="btn btn-info pull-right">提交</button>
                             </div>
                         </form:form>
                     </div>
@@ -138,6 +138,7 @@
 <jsp:include page="../includes/footer.jsp" />
 <script src="/static/assets/plugins/jquery-ztree/js/jquery.ztree.core-3.5.min.js"></script>
 <script src="/static/assets/plugins/dropzone/min/dropzone.min.js"></script>
+<script src="/static/assets/plugins/wangEditor/wangEditor.min.js"></script>
 
 <script>
     $(function (){
@@ -167,8 +168,25 @@
                     $(id).val("");
                 }
             });
+
         }
     });
+
+    // 初始化编辑器
+    let wangEditor = App.initWangEditor();
+
+    // 绑定提交按钮
+    $("#submitBut").bind("click",function () {
+        // 内容有效
+        if(!!wangEditor.txt.text()){
+            $("#content").val(wangEditor.txt.html());
+        }
+        // 内容无效
+        else{
+            $("#content").val(wangEditor.txt.text());
+        }
+    });
+
 
 </script>
 </body>

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -24,14 +25,24 @@ import java.util.UUID;
 @Controller
 public class FileUploadController {
 
-    private final String UPLOAD_PATH = "/static/upload";
+    private final String UPLOAD_PATH = "/static/upload/";
 
+    /**
+     * 文件上传
+     * @param dropzoneFile 通过dropzone上传的文件
+     * @param editorFile 通过wangEditor上传的文件
+     * @param request
+     * @return
+     */
     @ResponseBody
     @PostMapping("upload")
-    public Map<String,Object> upload(MultipartFile dropzoneFile, HttpServletRequest request){
+    public Map<String,Object> upload(MultipartFile dropzoneFile,MultipartFile editorFile,HttpServletRequest request){
         HashMap<String, Object> result = new HashMap<>();
+
+        MultipartFile uploadFile = dropzoneFile == null ? editorFile : dropzoneFile;
+
         // 获取上传文件的原始名称
-        String fileName = dropzoneFile.getOriginalFilename();
+        String fileName = uploadFile.getOriginalFilename();
         // 获取文件后缀
         String fileSuffix = fileName.substring(fileName.lastIndexOf("."));
         // 设置文件上传路径
@@ -47,14 +58,21 @@ public class FileUploadController {
 
         try {
             // 写入文件
-            dropzoneFile.transferTo(file);
+            uploadFile.transferTo(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        String url = String.format("%s://%s:%s%s%s",request.getScheme() ,request.getServerName(), request.getServerPort(),UPLOAD_PATH,file.getName());
+
         // 返回数据
-        String url = String.format("%s:%s%s/%s", request.getServerName(), request.getServerPort(),UPLOAD_PATH,file.getName());
-        result.put("url",url);
+        if(dropzoneFile != null){
+            result.put("url",url);
+        }else{
+            result.put("errno",0);
+            result.put("data", new String[]{url});
+        }
+
         return result;
     }
 }
