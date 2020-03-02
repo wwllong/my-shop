@@ -88,13 +88,13 @@ public class ContentCategoryController {
      */
     private void sortList(List<TbContentCategory> sourceList, List<TbContentCategory> targetList,Long parentId){
         for(TbContentCategory contentCategory : sourceList){
-            if(contentCategory.getParentId().equals(parentId)){
+            if(contentCategory.getParent() != null && contentCategory.getParent().getId().equals(parentId)){
                 targetList.add(contentCategory);
 
                 // 判断是否是父节点、继续追加子节点
                 if(contentCategory.getIsParent()){
                     for(TbContentCategory contentCategory1 :sourceList){
-                        if(contentCategory.getId().equals(contentCategory1.getParentId())){
+                        if(contentCategory1.getParent() != null && contentCategory.getId().equals(contentCategory1.getParent().getId())){
                             sortList(sourceList,targetList,contentCategory.getId());
                             break;
                         }
@@ -123,7 +123,7 @@ public class ContentCategoryController {
      * @return
      */
     @GetMapping(value = "form")
-    public String form(){
+    public String form(TbContentCategory tbContentCategory){
         return "content_category_form";
     }
 

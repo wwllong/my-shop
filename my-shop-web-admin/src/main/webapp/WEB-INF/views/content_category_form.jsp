@@ -52,8 +52,8 @@
                                     <label class="col-sm-2 control-label">父级类目</label>
 
                                     <div class="col-sm-10">
-                                        <form:hidden path="parentId"/>
-                                        <input id="categoryName" class="form-control required" placeholder="请选择" readonly="true" data-toggle="modal" data-target="#modal-confirm" />
+                                        <form:hidden id="parentId" path="parent.id"/>
+                                        <input id="categoryName" class="form-control required" placeholder="请选择" readonly="true" data-toggle="modal" data-target="#modal-confirm" value="${tbContentCategory.parent.name}"/>
                                     </div>
                                 </div>
 
@@ -70,20 +70,6 @@
 
                                     <div class="col-sm-10">
                                         <form:input path="sortOrder" class="form-control required" placeholder="分类排序" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">否为父类目</label>
-                                    <div class="col-sm-1">
-                                        <label>
-                                            <form:radiobutton path="isParent" cssClass="minimal" value="1" checked="true"/> 是
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <label>
-                                            <form:radiobutton path="isParent" cssClass="minimal" value="0"/> 否
-                                        </label>
                                     </div>
                                 </div>
 

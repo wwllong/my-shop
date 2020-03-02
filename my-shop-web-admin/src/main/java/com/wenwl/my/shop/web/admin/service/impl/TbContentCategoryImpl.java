@@ -49,9 +49,28 @@ public class TbContentCategoryImpl implements TbContentCategoryService {
         }
         // 验证通过
         else{
+            TbContentCategory parent = tbContentCategory.getParent();
+            if(parent.getId() == null){
+                // 说明当前节点是个根节点
+                parent.setId(0L);
+            }
             tbContentCategory.setUpdated(new Date());
             //新增内容分类
             if(tbContentCategory.getId() == null){
+                tbContentCategory.setCreated(new Date());
+                // 判断当前节点是否为父节点
+                if(parent.getId() == 0L){
+                    tbContentCategory.setIsParent(true);
+                }else{
+                    tbContentCategory.setIsParent(false);
+                    // 更新父节点的信息，TODO 跳过获取，根据ID直接更新
+                    TbContentCategory currentCategoryParent = getById(parent.getId());
+                    if(currentCategoryParent != null){
+                        currentCategoryParent.setIsParent(true);
+                        tbContentCategoryDao.update(currentCategoryParent);
+                    }
+                }
+
                 tbContentCategoryDao.insert(tbContentCategory);
             }
             //编辑内容分类

@@ -3,13 +3,18 @@
 <mapper namespace="com.wenwl.my.shop.web.admin.dao.TbContentCategoryDao">
     <sql id="tbContentCategory">
         a.id,
-        a.parent_id,
         a.name,
         a.status,
         a.sort_order,
         a.is_parent,
         a.created,
-        a.updated
+        a.updated,
+        IFNULL(b.id,'0') AS `parent.id`,
+        IFNULL(b.name,'/') AS `parent.name`
+    </sql>
+
+    <sql id="tbContentCategoryJoins">
+        LEFT JOIN tb_content_category AS b ON a.parent_id = b.id
     </sql>
 
     <insert id="insert">
@@ -26,7 +31,7 @@
         VALUES
             (
                 #{id},
-                #{parentId},
+                #{parent.id},
                 #{name},
                 #{status},
                 #{sortOrder},
@@ -41,7 +46,7 @@
           tb_content_category
         SET
             id = #{id},
-            parent_id = #{parentId},
+            parent_id = #{parent.id},
             name = #{name},
             status =  #{status},
             sort_order = #{sortOrder},
@@ -57,6 +62,7 @@
             <include refid="tbContentCategory"/>
         FROM
             tb_content_category AS a
+        <include refid="tbContentCategoryJoins"/>
         ORDER BY a.status
     </select>
 
@@ -65,6 +71,7 @@
             <include refid="tbContentCategory"/>
         FROM
            tb_content_category AS a
+        <include refid="tbContentCategoryJoins"/>
         WHERE a.parent_id = #{parentId}
     </select>
 
@@ -73,6 +80,7 @@
         <include refid="tbContentCategory"/>
         FROM
             tb_content_category AS a
+        <include refid="tbContentCategoryJoins"/>
         WHERE
             a.id = #{id}
     </select>
