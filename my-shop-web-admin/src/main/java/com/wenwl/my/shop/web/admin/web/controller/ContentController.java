@@ -132,7 +132,7 @@ public class ContentController {
     }
 
     /**
-     * 返回用户详情
+     * 返回内容详情
      * @return
      */
     @GetMapping(value = "detail")

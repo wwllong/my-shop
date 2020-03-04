@@ -90,6 +90,7 @@
 </div>
 
 <tags:modal_confirm />
+<tags:modal_detail />
 
 <jsp:include page="../includes/footer.jsp" />
 <script src="/static/assets/plugins/treeTable/jquery.treeTable.min.js"></script>
