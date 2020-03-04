@@ -134,4 +134,12 @@
         </where>
     </select>
 
+    <delete id="deleteByCategoryId">
+        DELETE FROM tb_content
+        WHERE category_id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
 </mapper>

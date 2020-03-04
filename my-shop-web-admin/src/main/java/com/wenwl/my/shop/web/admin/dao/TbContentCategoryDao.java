@@ -46,4 +46,9 @@ public interface TbContentCategoryDao {
      */
     public TbContentCategory getById(Long id);
 
+    /**
+     * 删除
+     * @return
+     */
+    public int delete(Long[] categoryIds);
 }

@@ -65,4 +65,11 @@ public interface TbContentDao {
      * @return
      */
     public int count(TbContent tbContent);
+
+    /**
+     * 根据内容类目ID删除
+     * @param categoryIds
+     * @return
+     */
+    public int deleteByCategoryId(Long[] categoryIds);
 }

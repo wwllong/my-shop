@@ -122,4 +122,15 @@ public class TbContentServiceImpl implements TbContentService {
         return tbContentDao.count(tbContent);
     }
 
+    /**
+     * 根据内容类目ID删除
+     *
+     * @param categoryIds
+     */
+    @Override
+    public int deleteByCategoryId(Long[] categoryIds) {
+        return tbContentDao.deleteByCategoryId(categoryIds);
+    }
+
+
 }

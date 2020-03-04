@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,6 @@
 
                             <div class="row" style="padding-left:12px; padding: 10px;">
                                 <a href="/content/category/form" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus"></i> 新增</a>
-                                <button type="button" class="btn btn-sm btn-danger" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -67,7 +67,7 @@
                                         <td>${tbContentCategory.sortOrder}</td>
                                         <td>
                                             <a href="/content/category/form?id=${tbContentCategory.id}" type="button" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> 编辑</a>
-                                            <button  type="button" class="btn btn-sm btn-danger" ><i class="fa fa-trash-o"></i> 删除</button >
+                                            <button  type="button" class="btn btn-sm btn-danger" onclick="App.deleteSingle('/content/category/delete',${tbContentCategory.id},'内容分类的子类目以及内容都将删除，您确定删除数据项吗？')"><i class="fa fa-trash-o"></i> 删除</button >
                                             <a href="/content/category/form?parent.id=${tbContentCategory.id}&parent.name=${tbContentCategory.name}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus"></i> 新增下级菜单</a>
                                         </td>
                                     </tr>
@@ -88,6 +88,8 @@
 
     <jsp:include page="../includes/copyright.jsp" />
 </div>
+
+<tags:modal_confirm />
 
 <jsp:include page="../includes/footer.jsp" />
 <script src="/static/assets/plugins/treeTable/jquery.treeTable.min.js"></script>

@@ -39,5 +39,12 @@ public interface TbContentCategoryService {
      */
     public TbContentCategory getById(Long id);
 
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    public int delete(Long id);
+
 
 }

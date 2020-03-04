@@ -3,6 +3,7 @@ package com.wenwl.my.shop.web.admin.web.controller;
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.domain.entity.TbContentCategory;
 import com.wenwl.my.shop.web.admin.service.TbContentCategoryService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -125,6 +126,25 @@ public class ContentCategoryController {
     @GetMapping(value = "form")
     public String form(TbContentCategory tbContentCategory){
         return "content_category_form";
+    }
+
+    /**
+     * 删除节点
+     * @param ids
+     * @return
+     */
+    @ResponseBody
+    @PostMapping(value = "delete")
+    public BaseResult delete(String ids){
+        BaseResult baseResult = null;
+        if(StringUtils.isNotBlank(ids)){
+            contentCategoryService.delete(Long.parseLong(ids));
+
+            baseResult = BaseResult.success("删除分类及其子类及其全部内容成功");
+        }else{
+            baseResult = BaseResult.fail("删除失败");
+        }
+        return baseResult;
     }
 
 

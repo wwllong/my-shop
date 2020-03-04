@@ -5,9 +5,11 @@ import com.wenwl.my.shop.commons.utils.BeanValidator;
 import com.wenwl.my.shop.domain.entity.TbContentCategory;
 import com.wenwl.my.shop.web.admin.dao.TbContentCategoryDao;
 import com.wenwl.my.shop.web.admin.service.TbContentCategoryService;
+import com.wenwl.my.shop.web.admin.service.TbContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class TbContentCategoryImpl implements TbContentCategoryService {
 
     @Autowired
     private TbContentCategoryDao tbContentCategoryDao;
+
+    @Autowired
+    private TbContentService tbContentService;
 
     /**
      * 列表查询
@@ -63,7 +68,7 @@ public class TbContentCategoryImpl implements TbContentCategoryService {
                     tbContentCategory.setIsParent(true);
                 }else{
                     tbContentCategory.setIsParent(false);
-                    // 更新父节点的信息，TODO 跳过获取，根据ID直接更新
+                    // 更新父节点的信息
                     TbContentCategory currentCategoryParent = getById(parent.getId());
                     if(currentCategoryParent != null){
                         currentCategoryParent.setIsParent(true);
@@ -101,6 +106,42 @@ public class TbContentCategoryImpl implements TbContentCategoryService {
     @Override
     public TbContentCategory getById(Long id) {
         return tbContentCategoryDao.getById(id);
+    }
+
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public int delete(Long id) {
+        // 找到所有子节点的id
+        List<Long> targetList = new ArrayList();
+        findAllChild(targetList, id);
+
+        Long[] categoryIds = targetList.toArray(new Long[targetList.size()]);
+        // 删除类目以及所有子类目
+        tbContentCategoryDao.delete(categoryIds);
+
+        // 删除相关的内容
+        tbContentService.deleteByCategoryId(categoryIds);
+        return 0;
+    }
+
+    /**
+     * 查找所有子节点
+     * @param targetList
+     * @param parentId
+     */
+    private void findAllChild(List<Long> targetList, Long parentId) {
+        targetList.add(parentId);
+
+        List<TbContentCategory> tbContentCategories = selectByPid(parentId);
+        for(TbContentCategory tbContentCategory : tbContentCategories){
+            findAllChild(targetList, tbContentCategory.getId());
+        }
+
     }
 
 }
