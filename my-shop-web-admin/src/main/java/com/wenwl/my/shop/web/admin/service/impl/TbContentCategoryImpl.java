@@ -120,9 +120,9 @@ public class TbContentCategoryImpl implements TbContentCategoryService {
         List<Long> targetList = new ArrayList();
         findAllChild(targetList, id);
 
-        Long[] categoryIds = targetList.toArray(new Long[targetList.size()]);
+        String[] categoryIds = targetList.toArray(new String[targetList.size()]);
         // 删除类目以及所有子类目
-        tbContentCategoryDao.delete(categoryIds);
+        tbContentCategoryDao.batchDelete(categoryIds);
 
         // 删除相关的内容
         tbContentService.deleteByCategoryId(categoryIds);

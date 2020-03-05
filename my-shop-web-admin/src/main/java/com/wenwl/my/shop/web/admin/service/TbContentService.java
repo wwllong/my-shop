@@ -58,5 +58,5 @@ public interface TbContentService {
      * 根据内容类目ID删除
      * @param categoryIds
      */
-    public int deleteByCategoryId(Long[] categoryIds);
+    public int deleteByCategoryId(String[] categoryIds);
 }

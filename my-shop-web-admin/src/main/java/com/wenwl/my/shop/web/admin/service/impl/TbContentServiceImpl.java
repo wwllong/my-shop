@@ -67,7 +67,7 @@ public class TbContentServiceImpl implements TbContentService {
      */
     @Override
     public int delete(TbContent tbContent) {
-        return tbContentDao.delete(tbContent);
+        return tbContentDao.delete(tbContent.getId());
     }
 
     /**
@@ -128,7 +128,7 @@ public class TbContentServiceImpl implements TbContentService {
      * @param categoryIds
      */
     @Override
-    public int deleteByCategoryId(Long[] categoryIds) {
+    public int deleteByCategoryId(String[] categoryIds) {
         return tbContentDao.deleteByCategoryId(categoryIds);
     }
 

@@ -52,6 +52,7 @@ public class TbUserServiceImpl implements TbUserService {
             }
             //编辑用户
             else{
+                // TODO 密码问题
                 tbUserDao.update(tbUser);
             }
             return BaseResult.success("保存信息成功");
@@ -66,7 +67,7 @@ public class TbUserServiceImpl implements TbUserService {
      */
     @Override
     public int delete(TbUser tbUser) {
-        return tbUserDao.delete(tbUser);
+        return tbUserDao.delete(tbUser.getId());
     }
 
     /**

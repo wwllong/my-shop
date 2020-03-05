@@ -85,7 +85,7 @@
             a.id = #{id}
     </select>
 
-    <delete id="delete">
+    <delete id="batchDelete">
          DELETE FROM tb_content_category
          WHERE id IN
          <foreach collection="array" open="(" close=")" separator="," item="id">
