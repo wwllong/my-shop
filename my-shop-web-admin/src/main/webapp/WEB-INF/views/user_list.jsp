@@ -47,7 +47,7 @@
 
                             <div class="row" style="padding-left:12px; padding: 10px;">
                                 <a href="/user/form" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus"></i> 新增</a>
-                                <button type="button" class="btn btn-sm btn-danger" onclick="App.deleteMulti('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
+                                <button type="button" class="btn btn-sm btn-danger" onclick="App.batchDelete('/user/delete')"><i class="fa fa-trash-o"></i> 删除</button>
 <%--                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-download"></i> 导入</a>--%>
 <%--                                <a href="#" class="btn btn-sm btn-default" type="button"><i class="fa fa-upload"></i> 导出</a>--%>
                             </div>

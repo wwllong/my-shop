@@ -110,8 +110,8 @@ public class TbUserServiceImpl implements TbUserService {
      * @return
      */
     @Override
-    public long deleteMulti(String[] ids) {
-        return tbUserDao.deleteMulti(ids);
+    public long batchDelete(String[] ids) {
+        return tbUserDao.batchDelete(ids);
     }
 
     /**

@@ -96,7 +96,7 @@ public class UserController {
         BaseResult baseResult = null;
         if(StringUtils.isNotBlank(ids)){
             String[] idArray = ids.split(",");
-            userService.deleteMulti(idArray);
+            userService.batchDelete(idArray);
             baseResult = BaseResult.success("删除成功");
         }else{
             baseResult = BaseResult.fail("删除失败");

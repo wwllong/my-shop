@@ -76,7 +76,7 @@
           a.email = #{email}
     </select>
 
-    <delete id="deleteMulti" >
+    <delete id="batchDelete" >
         DELETE FROM tb_user
         WHERE id IN
         <foreach collection="array" open="(" close=")" separator="," item="id">

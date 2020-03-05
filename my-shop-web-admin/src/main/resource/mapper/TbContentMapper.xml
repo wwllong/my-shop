@@ -91,7 +91,7 @@
             id = #{id}
     </update>
 
-    <delete id="deleteMulti" >
+    <delete id="batchDelete" >
         DELETE FROM tb_content
         WHERE id IN
         <foreach collection="array" open="(" close=")" separator="," item="id">

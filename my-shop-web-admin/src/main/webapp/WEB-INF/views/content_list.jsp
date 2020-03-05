@@ -47,7 +47,7 @@
 
                             <div class="row" style="padding-left:12px; padding: 10px;">
                                 <a href="/content/form" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus"></i> 新增</a>
-                                <button type="button" class="btn btn-sm btn-danger" onclick="App.deleteMulti('/content/delete')"><i class="fa fa-trash-o"></i> 删除</button>
+                                <button type="button" class="btn btn-sm btn-danger" onclick="App.batchDelete('/content/delete')"><i class="fa fa-trash-o"></i> 删除</button>
                             </div>
 
                             <!-- 搜索条件 -->

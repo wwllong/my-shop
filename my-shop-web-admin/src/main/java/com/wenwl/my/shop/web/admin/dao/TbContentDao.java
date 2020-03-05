@@ -51,7 +51,7 @@ public interface TbContentDao {
      * @param ids
      * @return
      */
-    long deleteMulti(String[] ids);
+    long batchDelete(String[] ids);
 
     /**
      * 分页查询

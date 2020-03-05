@@ -139,7 +139,7 @@ var App = function () {
     /**
      * 删除多条记录
      */
-    let handlerDeleteMulti = function (url) {
+    let handlerBatchDelete = function (url) {
         _idArray = new Array();
 
         // 将要删除的元素的ID放入数组
@@ -368,8 +368,8 @@ var App = function () {
          * 批量删除
          * @param url
          */
-        deleteMulti : function (url) {
-            handlerDeleteMulti(url);
+        batchDelete : function (url) {
+            handlerBatchDelete(url);
         },
         /**
          * datatable 初始化
