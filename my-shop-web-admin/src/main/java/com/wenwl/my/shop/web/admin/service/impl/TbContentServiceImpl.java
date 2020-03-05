@@ -88,7 +88,7 @@ public class TbContentServiceImpl implements TbContentService {
      * @return
      */
     @Override
-    public long batchDelete(String[] ids) {
+    public int batchDelete(String[] ids) {
         return tbContentDao.batchDelete(ids);
     }
 

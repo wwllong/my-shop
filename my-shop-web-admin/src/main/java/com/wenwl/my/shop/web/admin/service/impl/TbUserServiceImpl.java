@@ -111,7 +111,7 @@ public class TbUserServiceImpl implements TbUserService {
      * @return
      */
     @Override
-    public long batchDelete(String[] ids) {
+    public int batchDelete(String[] ids) {
         return tbUserDao.batchDelete(ids);
     }
 

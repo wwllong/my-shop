@@ -1,11 +1,8 @@
 package com.wenwl.my.shop.web.admin.dao;
 
-import com.wenwl.my.shop.commons.persistence.BaseDao;
+import com.wenwl.my.shop.commons.framework.BaseDao;
 import com.wenwl.my.shop.domain.entity.TbUser;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author wenwl

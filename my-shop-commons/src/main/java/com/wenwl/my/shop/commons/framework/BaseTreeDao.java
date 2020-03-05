@@ -1,4 +1,6 @@
-package com.wenwl.my.shop.commons.persistence;
+package com.wenwl.my.shop.commons.framework;
+
+import com.wenwl.my.shop.commons.persistence.BaseEntity;
 
 import java.util.List;
 
