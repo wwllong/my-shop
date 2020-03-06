@@ -124,7 +124,7 @@ public class ContentController {
         HashMap<String, Object> params = new HashMap<>();
         params.put("page",start);
         params.put("pageSize",length);
-        params.put("tbContent",tbContent);
+        params.put("pageParams",tbContent);
         PageInfo<TbContent> pageInfo = contentService.page(params);
         pageInfo.setDraw(draw);
         return pageInfo;

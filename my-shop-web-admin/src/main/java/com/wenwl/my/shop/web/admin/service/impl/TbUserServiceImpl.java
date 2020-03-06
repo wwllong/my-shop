@@ -1,18 +1,15 @@
 package com.wenwl.my.shop.web.admin.service.impl;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
-import com.wenwl.my.shop.commons.dto.PageInfo;
 import com.wenwl.my.shop.commons.utils.BeanValidator;
 import com.wenwl.my.shop.domain.entity.TbUser;
+import com.wenwl.my.shop.web.admin.commons.framework.AbstractServiceImpl;
 import com.wenwl.my.shop.web.admin.dao.TbUserDao;
 import com.wenwl.my.shop.web.admin.service.TbUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author wenwl
@@ -21,10 +18,7 @@ import java.util.Map;
  * @vserion 1.0.0
  */
 @Service
-public class TbUserServiceImpl implements TbUserService {
-
-    @Autowired
-    private TbUserDao tbUserDao;
+public class TbUserServiceImpl extends AbstractServiceImpl<TbUserDao, TbUser> implements TbUserService {
 
     /**
      * 保存用户信息
@@ -48,37 +42,15 @@ public class TbUserServiceImpl implements TbUserService {
                 // 密码加密处理
                 tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
                 tbUser.setCreated(new Date());
-                tbUserDao.insert(tbUser);
+                baseDao.insert(tbUser);
             }
             //编辑用户
             else{
                 // TODO 密码问题
-                tbUserDao.update(tbUser);
+                baseDao.update(tbUser);
             }
             return BaseResult.success("保存信息成功");
         }
-    }
-
-    /**
-     * 删除用户
-     *
-     * @param tbUser
-     * @return
-     */
-    @Override
-    public int delete(TbUser tbUser) {
-        return tbUserDao.delete(tbUser.getId());
-    }
-
-    /**
-     * 查询用户
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public TbUser getById(Long id) {
-        return tbUserDao.getById(id);
     }
 
     /**
@@ -90,7 +62,7 @@ public class TbUserServiceImpl implements TbUserService {
      */
     @Override
     public TbUser login(String email, String password) {
-        TbUser tbUser = tbUserDao.getByEmail(email);
+        TbUser tbUser = baseDao.getByEmail(email);
         if(tbUser != null){
             // 明文密码加密
             String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
@@ -102,47 +74,6 @@ public class TbUserServiceImpl implements TbUserService {
 
         }
         return null;
-    }
-
-    /**
-     * 批量删除
-     *
-     * @param ids
-     * @return
-     */
-    @Override
-    public int batchDelete(String[] ids) {
-        return tbUserDao.batchDelete(ids);
-    }
-
-    /**
-     * 分页查询
-     *
-     * @param params
-     * @return
-     */
-    @Override
-    public PageInfo<TbUser> page(Map<String, Object> params) {
-        PageInfo<TbUser> pageInfo = new PageInfo<>();
-
-        int count = tbUserDao.count((TbUser)params.get("tbUser"));
-        List<TbUser> tbUsers = tbUserDao.page(params);
-
-        pageInfo.setRecordsTotal(count);
-        pageInfo.setRecordsFiltered(count);
-        pageInfo.setData(tbUsers);
-
-        return pageInfo;
-    }
-
-    /**
-     * 统计总记录数
-     *
-     * @return
-     */
-    @Override
-    public int count(TbUser tbUser) {
-        return tbUserDao.count(tbUser);
     }
 
 }

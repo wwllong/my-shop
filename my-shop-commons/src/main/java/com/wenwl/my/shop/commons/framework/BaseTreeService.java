@@ -46,4 +46,11 @@ public interface BaseTreeService<T extends BaseEntity> {
      */
     public T getById(Long id);
 
+    /**
+     * 查找所有子节点
+     * @param targetList
+     * @param parentId
+     */
+    public void findAllChild(List<Long> targetList, Long parentId);
+
 }

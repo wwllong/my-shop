@@ -3,6 +3,7 @@ package com.wenwl.my.shop.web.admin.service.impl;
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.commons.utils.BeanValidator;
 import com.wenwl.my.shop.domain.entity.TbContentCategory;
+import com.wenwl.my.shop.web.admin.commons.framework.AbstractTreeServiceImpl;
 import com.wenwl.my.shop.web.admin.dao.TbContentCategoryDao;
 import com.wenwl.my.shop.web.admin.service.TbContentCategoryService;
 import com.wenwl.my.shop.web.admin.service.TbContentService;
@@ -21,23 +22,10 @@ import java.util.List;
  * @vserion 1.0.0
  */
 @Service
-public class TbContentCategoryImpl implements TbContentCategoryService {
-
-    @Autowired
-    private TbContentCategoryDao tbContentCategoryDao;
+public class TbContentCategoryImpl extends AbstractTreeServiceImpl<TbContentCategoryDao, TbContentCategory> implements TbContentCategoryService {
 
     @Autowired
     private TbContentService tbContentService;
-
-    /**
-     * 列表查询
-     *
-     * @return
-     */
-    @Override
-    public List<TbContentCategory> selectAll() {
-        return tbContentCategoryDao.selectAll();
-    }
 
     /**
      * 保存内容分类
@@ -72,40 +60,18 @@ public class TbContentCategoryImpl implements TbContentCategoryService {
                     TbContentCategory currentCategoryParent = getById(parent.getId());
                     if(currentCategoryParent != null){
                         currentCategoryParent.setIsParent(true);
-                        tbContentCategoryDao.update(currentCategoryParent);
+                        baseDao.update(currentCategoryParent);
                     }
                 }
 
-                tbContentCategoryDao.insert(tbContentCategory);
+                baseDao.insert(tbContentCategory);
             }
             //编辑内容分类
             else{
-                tbContentCategoryDao.update(tbContentCategory);
+                baseDao.update(tbContentCategory);
             }
             return BaseResult.success("保存内容分类成功");
         }
-    }
-
-    /**
-     * 根据父节点ID返回列表
-     *
-     * @param parentId
-     * @return
-     */
-    @Override
-    public List<TbContentCategory> selectByPid(Long parentId) {
-        return tbContentCategoryDao.selectByPid(parentId);
-    }
-
-    /**
-     * 查询内容分类
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public TbContentCategory getById(Long id) {
-        return tbContentCategoryDao.getById(id);
     }
 
     /**
@@ -122,26 +88,11 @@ public class TbContentCategoryImpl implements TbContentCategoryService {
 
         String[] categoryIds = targetList.toArray(new String[targetList.size()]);
         // 删除类目以及所有子类目
-        tbContentCategoryDao.batchDelete(categoryIds);
+        baseDao.batchDelete(categoryIds);
 
         // 删除相关的内容
         tbContentService.deleteByCategoryId(categoryIds);
-        return 0;
-    }
-
-    /**
-     * 查找所有子节点
-     * @param targetList
-     * @param parentId
-     */
-    private void findAllChild(List<Long> targetList, Long parentId) {
-        targetList.add(parentId);
-
-        List<TbContentCategory> tbContentCategories = selectByPid(parentId);
-        for(TbContentCategory tbContentCategory : tbContentCategories){
-            findAllChild(targetList, tbContentCategory.getId());
-        }
-
+        return 1;
     }
 
 }

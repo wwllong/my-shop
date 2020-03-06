@@ -125,7 +125,7 @@ public class UserController {
         HashMap<String, Object> params = new HashMap<>();
         params.put("page",start);
         params.put("pageSize",length);
-        params.put("tbUser",tbUser);
+        params.put("pageParams",tbUser);
         PageInfo<TbUser> pageInfo = userService.page(params);
         pageInfo.setDraw(draw);
         return pageInfo;
