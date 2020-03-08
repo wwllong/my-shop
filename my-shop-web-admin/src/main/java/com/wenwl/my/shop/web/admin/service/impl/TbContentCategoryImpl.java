@@ -9,6 +9,7 @@ import com.wenwl.my.shop.web.admin.service.TbContentCategoryService;
 import com.wenwl.my.shop.web.admin.service.TbContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,7 @@ import java.util.List;
  * @vserion 1.0.0
  */
 @Service
+@Transactional(readOnly = true)
 public class TbContentCategoryImpl extends BaseTreeServiceImpl<TbContentCategoryDao, TbContentCategory> implements TbContentCategoryService {
 
     @Autowired
@@ -34,6 +36,7 @@ public class TbContentCategoryImpl extends BaseTreeServiceImpl<TbContentCategory
      * @return
      */
     @Override
+    @Transactional(readOnly = false)
     public BaseResult save(TbContentCategory tbContentCategory) {
         String validator = BeanValidator.validator(tbContentCategory);
         // 验证不通过
@@ -81,6 +84,7 @@ public class TbContentCategoryImpl extends BaseTreeServiceImpl<TbContentCategory
      * @return
      */
     @Override
+    @Transactional(readOnly = false)
     public int delete(Long id) {
         // 找到所有子节点的id
         List<Long> targetList = new ArrayList();

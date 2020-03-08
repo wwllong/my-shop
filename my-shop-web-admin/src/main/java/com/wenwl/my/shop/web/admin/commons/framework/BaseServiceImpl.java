@@ -7,6 +7,7 @@ import com.wenwl.my.shop.commons.framework.BaseService;
 import com.wenwl.my.shop.commons.persistence.BaseEntity;
 import com.wenwl.my.shop.commons.utils.BeanValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,7 @@ public abstract class BaseServiceImpl<D extends BaseDao<T>,T extends BaseEntity>
      * @return
      */
     @Override
+    @Transactional(readOnly = false)
     public BaseResult save(T entity) {
 
         String validator = BeanValidator.validator(entity);
@@ -41,12 +43,12 @@ public abstract class BaseServiceImpl<D extends BaseDao<T>,T extends BaseEntity>
         //验证通过
         else{
             entity.setUpdated(new Date());
-            //新增内容
+            //新增
             if(entity.getId() == null){
                 entity.setCreated(new Date());
                 baseDao.insert(entity);
             }
-            //编辑内容
+            //编辑
             else{
                 baseDao.update(entity);
             }

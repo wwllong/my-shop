@@ -5,6 +5,7 @@ import com.wenwl.my.shop.web.admin.commons.framework.BaseServiceImpl;
 import com.wenwl.my.shop.web.admin.dao.TbContentDao;
 import com.wenwl.my.shop.web.admin.service.TbContentService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author wenwl
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
  * @vserion 1.0.0
  */
 @Service
+@Transactional(readOnly = true)
 public class TbContentServiceImpl extends BaseServiceImpl<TbContentDao, TbContent> implements TbContentService {
 
     /**
@@ -21,6 +23,7 @@ public class TbContentServiceImpl extends BaseServiceImpl<TbContentDao, TbConten
      * @param categoryIds
      */
     @Override
+    @Transactional(readOnly = false)
     public int deleteByCategoryId(String[] categoryIds) {
         return baseDao.deleteByCategoryId(categoryIds);
     }

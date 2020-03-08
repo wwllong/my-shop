@@ -7,6 +7,7 @@ import com.wenwl.my.shop.web.admin.commons.framework.BaseServiceImpl;
 import com.wenwl.my.shop.web.admin.dao.TbUserDao;
 import com.wenwl.my.shop.web.admin.service.TbUserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.Date;
  * @vserion 1.0.0
  */
 @Service
+@Transactional(readOnly = true)
 public class TbUserServiceImpl extends BaseServiceImpl<TbUserDao, TbUser> implements TbUserService {
 
     /**
@@ -27,6 +29,7 @@ public class TbUserServiceImpl extends BaseServiceImpl<TbUserDao, TbUser> implem
      * @return
      */
     @Override
+    @Transactional(readOnly = false)
     public BaseResult save(TbUser tbUser) {
         String validator = BeanValidator.validator(tbUser);
         // 验证不通过
