@@ -1,6 +1,7 @@
 package com.wenwl.my.shop.domain.entity;
 
 import com.wenwl.my.shop.commons.persistence.BaseEntity;
+import com.wenwl.my.shop.commons.persistence.BaseTreeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
@@ -15,8 +16,8 @@ import javax.validation.constraints.NotNull;
  * @vserion 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class TbContentCategory extends BaseEntity {
+@EqualsAndHashCode(callSuper = true)
+public class TbContentCategory extends BaseTreeEntity<TbContentCategory> {
 
     @Length(min = 2, max = 6, message = "分类名称长度必须介于 2 和 6 之间")
     private String name;
@@ -27,11 +28,5 @@ public class TbContentCategory extends BaseEntity {
 
     @NotNull(message = "排序不能为空")
     private Integer sortOrder;
-    /**
-     * 该类目是否为父类目，1为true，0为false，默认1
-     */
-    private Boolean isParent;
 
-    @NotNull(message = "父节点不能为空")
-    private TbContentCategory parent;
 }

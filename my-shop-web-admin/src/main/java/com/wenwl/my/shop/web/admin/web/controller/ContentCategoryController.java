@@ -2,12 +2,15 @@ package com.wenwl.my.shop.web.admin.web.controller;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.domain.entity.TbContentCategory;
+import com.wenwl.my.shop.web.admin.commons.framework.BaseTreeController;
 import com.wenwl.my.shop.web.admin.service.TbContentCategoryService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -22,28 +25,16 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "content/category")
-public class ContentCategoryController {
-
-    @Autowired
-    private TbContentCategoryService contentCategoryService;
+public class ContentCategoryController extends BaseTreeController<TbContentCategoryService, TbContentCategory> {
 
     /**
-     * 回显数据
-     * @param id
+     * ModelAttribute-创建实体对象
+     *
      * @return
      */
-    @ModelAttribute
-    public TbContentCategory getTbContent(Long id){
-        TbContentCategory tbContentCategory = null;
-
-        if(id != null){
-            tbContentCategory = contentCategoryService.getById(id);
-        }
-        else {
-            tbContentCategory = new TbContentCategory();
-        }
-
-        return tbContentCategory;
+    @Override
+    public TbContentCategory createEntity() {
+        return new TbContentCategory();
     }
 
     /**
@@ -53,9 +44,10 @@ public class ContentCategoryController {
      * @param model
      * @return
      */
+    @Override
     @PostMapping(value = "save")
     public String save(TbContentCategory tbContentCategory, RedirectAttributes redirectAttributes, Model model){
-        BaseResult baseResult = contentCategoryService.save(tbContentCategory);
+        BaseResult baseResult = baseService.save(tbContentCategory);
 
         if(BaseResult.STATUS_SUCCESS == baseResult.getStatus()){
             redirectAttributes.addFlashAttribute("baseResult",baseResult);
@@ -71,9 +63,10 @@ public class ContentCategoryController {
      * @param model
      * @return
      */
+    @Override
     @GetMapping("list")
     public String list(Model model){
-        List<TbContentCategory> sourceList = contentCategoryService.selectAll();
+        List<TbContentCategory> sourceList = baseService.selectAll();
         List<TbContentCategory> targetList = new ArrayList<>();
         sortList(sourceList,targetList,0L);
         model.addAttribute("tbContentCategories",targetList);
@@ -82,47 +75,25 @@ public class ContentCategoryController {
     }
 
     /**
-     * 对列表进行排序-方便前端列表TreeTable显示
-     * @param sourceList
-     * @param targetList
-     * @param parentId
-     */
-    private void sortList(List<TbContentCategory> sourceList, List<TbContentCategory> targetList,Long parentId){
-        for(TbContentCategory contentCategory : sourceList){
-            if(contentCategory.getParent() != null && contentCategory.getParent().getId().equals(parentId)){
-                targetList.add(contentCategory);
-
-                // 判断是否是父节点、继续追加子节点
-                if(contentCategory.getIsParent()){
-                    for(TbContentCategory contentCategory1 :sourceList){
-                        if(contentCategory1.getParent() != null && contentCategory.getId().equals(contentCategory1.getParent().getId())){
-                            sortList(sourceList,targetList,contentCategory.getId());
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
      * 根据parentId取得列表，提供给ZTree进行异步请求的接口
      * @param id
      * @return
      */
+    @Override
     @ResponseBody
     @PostMapping("tree/data")
     public List<TbContentCategory> treeData(Long id){
         if(id == null){
             id = 0L;
         }
-        return contentCategoryService.selectByPid(id);
+        return baseService.selectByPid(id);
     }
 
     /**
      * 跳转新增/编辑内容类目
      * @return
      */
+    @Override
     @GetMapping(value = "form")
     public String form(TbContentCategory tbContentCategory){
         return "content_category_form";
@@ -133,12 +104,13 @@ public class ContentCategoryController {
      * @param ids
      * @return
      */
+    @Override
     @ResponseBody
     @PostMapping(value = "delete")
     public BaseResult delete(String ids){
         BaseResult baseResult = null;
         if(StringUtils.isNotBlank(ids)){
-            contentCategoryService.delete(Long.parseLong(ids));
+            baseService.delete(Long.parseLong(ids));
 
             baseResult = BaseResult.success("删除分类及其子类及其全部内容成功");
         }else{

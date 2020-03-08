@@ -3,7 +3,7 @@ package com.wenwl.my.shop.web.admin.service.impl;
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.commons.utils.BeanValidator;
 import com.wenwl.my.shop.domain.entity.TbContentCategory;
-import com.wenwl.my.shop.web.admin.commons.framework.AbstractTreeServiceImpl;
+import com.wenwl.my.shop.web.admin.commons.framework.BaseTreeServiceImpl;
 import com.wenwl.my.shop.web.admin.dao.TbContentCategoryDao;
 import com.wenwl.my.shop.web.admin.service.TbContentCategoryService;
 import com.wenwl.my.shop.web.admin.service.TbContentService;
@@ -22,7 +22,7 @@ import java.util.List;
  * @vserion 1.0.0
  */
 @Service
-public class TbContentCategoryImpl extends AbstractTreeServiceImpl<TbContentCategoryDao, TbContentCategory> implements TbContentCategoryService {
+public class TbContentCategoryImpl extends BaseTreeServiceImpl<TbContentCategoryDao, TbContentCategory> implements TbContentCategoryService {
 
     @Autowired
     private TbContentService tbContentService;

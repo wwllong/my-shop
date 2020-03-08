@@ -2,6 +2,7 @@ package com.wenwl.my.shop.domain.entity;
 
 import com.wenwl.my.shop.commons.persistence.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
  * @vserion 1.0.0
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class TbContent extends BaseEntity {
     /**
      * 标题

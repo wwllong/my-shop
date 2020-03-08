@@ -1,18 +1,17 @@
 package com.wenwl.my.shop.web.admin.web.controller;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
-import com.wenwl.my.shop.commons.dto.PageInfo;
 import com.wenwl.my.shop.domain.entity.TbContent;
+import com.wenwl.my.shop.web.admin.commons.framework.BaseController;
 import com.wenwl.my.shop.web.admin.service.TbContentService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 
 /**
  * @author wenwl
@@ -22,43 +21,35 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping(value = "content")
-public class ContentController {
-
-    @Autowired
-    private TbContentService contentService;
+public class ContentController extends BaseController<TbContentService, TbContent>{
 
     /**
-     * 回显数据
-     * @param id
+     * ModelAttribute-创建实体对象
+     *
      * @return
      */
-    @ModelAttribute
-    public TbContent getTbContent(Long id){
-        TbContent tbContent = null;
-
-        if(id != null){
-            tbContent = contentService.getById(id);
-        }
-        else {
-            tbContent = new TbContent();
-        }
-
-        return tbContent;
+    @Override
+    public TbContent createEntity() {
+        return new TbContent();
     }
+
 
     /**
      * 跳转内容列表
      * @return
      */
+    @Override
     @GetMapping(value = "list")
-    public String getList(){
+    public String list(){
         return "content_list";
     }
 
-    /**
+
+     /**
      * 跳转新增内容
      * @return
      */
+    @Override
     @GetMapping(value = "form")
     public String form(){
         return "content_form";
@@ -71,9 +62,10 @@ public class ContentController {
      * @param model
      * @return
      */
+    @Override
     @PostMapping(value = "save")
     public String save(TbContent tbContent, RedirectAttributes redirectAttributes,Model model){
-        BaseResult baseResult = contentService.save(tbContent);
+        BaseResult baseResult = baseService.save(tbContent);
 
         if(BaseResult.STATUS_SUCCESS == baseResult.getStatus()){
             redirectAttributes.addFlashAttribute("baseResult",baseResult);
@@ -89,13 +81,14 @@ public class ContentController {
      * @param ids
      * @return
      */
+    @Override
     @ResponseBody
     @PostMapping(value = "delete")
     public BaseResult delete(String ids){
         BaseResult baseResult = null;
         if(StringUtils.isNotBlank(ids)){
             String[] idArray = ids.split(",");
-            contentService.batchDelete(idArray);
+            baseService.batchDelete(idArray);
             baseResult = BaseResult.success("删除成功");
         }else{
             baseResult = BaseResult.fail("删除失败");
@@ -103,41 +96,14 @@ public class ContentController {
         return baseResult;
     }
 
-    /**
-     * 分页查询
-     * @param req
-     * @param tbContent
-     * @return
-     */
-    @ResponseBody
-    @GetMapping(value = "page")
-    public PageInfo<TbContent> page(HttpServletRequest req,TbContent tbContent){
-
-        String drawStr = req.getParameter("draw");
-        String startStr = req.getParameter("start");
-        String lengthStr = req.getParameter("length");
-
-        int draw = drawStr == null ? 0 : Integer.parseInt(drawStr);
-        int start = startStr == null ? 0 : Integer.parseInt(startStr);
-        int length = lengthStr == null ? 0 : Integer.parseInt(lengthStr);
-
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("page",start);
-        params.put("pageSize",length);
-        params.put("pageParams",tbContent);
-        PageInfo<TbContent> pageInfo = contentService.page(params);
-        pageInfo.setDraw(draw);
-        return pageInfo;
-
-    }
 
     /**
      * 返回内容详情
      * @return
      */
+    @Override
     @GetMapping(value = "detail")
     public String detail(){
         return "content_detail";
     }
-
 }

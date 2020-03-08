@@ -3,7 +3,7 @@ package com.wenwl.my.shop.web.admin.service.impl;
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.commons.utils.BeanValidator;
 import com.wenwl.my.shop.domain.entity.TbUser;
-import com.wenwl.my.shop.web.admin.commons.framework.AbstractServiceImpl;
+import com.wenwl.my.shop.web.admin.commons.framework.BaseServiceImpl;
 import com.wenwl.my.shop.web.admin.dao.TbUserDao;
 import com.wenwl.my.shop.web.admin.service.TbUserService;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.Date;
  * @vserion 1.0.0
  */
 @Service
-public class TbUserServiceImpl extends AbstractServiceImpl<TbUserDao, TbUser> implements TbUserService {
+public class TbUserServiceImpl extends BaseServiceImpl<TbUserDao, TbUser> implements TbUserService {
 
     /**
      * 保存用户信息

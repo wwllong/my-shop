@@ -19,7 +19,7 @@ import java.util.Date;
  * @vserion 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public class TbUser extends BaseEntity{
 
     /**

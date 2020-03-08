@@ -14,12 +14,12 @@ import java.util.Map;
 
 /**
  * @author wenwl
- * @className AbstractServiceImpl
+ * @className BaseServiceImpl
  * @dsecription 服务实现基类
  * @data 2020/3/6 0:36
  * @vserion 1.0.0
  */
-public abstract class AbstractServiceImpl<D extends BaseDao<T>,T extends BaseEntity> implements BaseService<T> {
+public abstract class BaseServiceImpl<D extends BaseDao<T>,T extends BaseEntity> implements BaseService<T> {
 
     @Autowired
     protected D baseDao;

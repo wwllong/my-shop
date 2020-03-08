@@ -10,12 +10,12 @@ import java.util.List;
 
 /**
  * @author wenwl
- * @className AbstractTreeServiceImpl
+ * @className BaseTreeServiceImpl
  * @dsecription 树服务实现基类
  * @data 2020/3/6 1:12
  * @vserion 1.0.0
  */
-public abstract class AbstractTreeServiceImpl<D extends BaseTreeDao<T>, T extends BaseEntity> implements BaseTreeService<T> {
+public abstract class BaseTreeServiceImpl<D extends BaseTreeDao<T>, T extends BaseEntity> implements BaseTreeService<T> {
 
     @Autowired
     protected D baseDao;
