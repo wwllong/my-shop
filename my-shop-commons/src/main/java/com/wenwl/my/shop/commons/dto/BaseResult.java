@@ -28,26 +28,36 @@ public class BaseResult implements Serializable {
      */
     private String message;
 
+    /**
+     * 返回的数据
+     */
+    private Object data;
+
     public static BaseResult success(){
-        return BaseResult.createResult(STATUS_SUCCESS,"成功");
+        return BaseResult.createResult(STATUS_SUCCESS,"成功",null);
     }
 
     public static BaseResult success(String message){
-        return BaseResult.createResult(STATUS_SUCCESS,message);
+        return BaseResult.createResult(STATUS_SUCCESS,message,null);
+    }
+
+    public static BaseResult success(String message,Object data){
+        return BaseResult.createResult(STATUS_SUCCESS,message,data);
     }
 
     public static BaseResult fail(){
-        return BaseResult.createResult(STATUS_FAIL,"失败");
+        return BaseResult.createResult(STATUS_FAIL,"失败",null);
     }
 
     public static BaseResult fail(String message){
-        return BaseResult.createResult(STATUS_FAIL,message);
+        return BaseResult.createResult(STATUS_FAIL,message,null);
     }
 
-    private static BaseResult createResult(int status, String message){
+    private static BaseResult createResult(int status, String message, Object data){
         BaseResult baseResult = new BaseResult();
         baseResult.setStatus(status);
         baseResult.setMessage(message);
+        baseResult.setData(data);
         return baseResult;
     }
 }
