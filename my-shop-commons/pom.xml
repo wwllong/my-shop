@@ -72,6 +72,13 @@
         </dependency>
         <!-- Hibernate Validator End-->
 
+        <!-- Fileupload Begin -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+        <!-- Fileupload End -->
+
     </dependencies>
 
 </project>
