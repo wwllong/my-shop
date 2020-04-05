@@ -488,19 +488,7 @@ $(function(){
                 参数一：参数一为包裹轮播图的元素，该参数可以为一个元素，也可以为一个包裹多个元素的数组或伪数组
                 参数二：参数二为配置参数，可以传递auto，auto的值若为false则不自动轮播，反之，默认为false。time为轮播的时间，默认为2000毫秒
             */
-            var eles = new WySlider(document.querySelectorAll(".ws-slider"),{auto: true,time: 3000});
-           new WySlider(document.getElementById("js_slider"));
-            setInterval(function (){
-                //eles[0].index可以轮播的当前索引
-                console.log(eles[0].index);
-            }, 1500);
+            new WySlider(document.querySelectorAll(".ws-slider"),{auto: true,time: 3000});
+
       } 
 
-
-
-
-/***
-*/
-
-var ddd=document.getElementById('d');
-ddd.value='sjhagoha';

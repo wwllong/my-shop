@@ -200,21 +200,21 @@ _display: block;
 	width: 1210px;
 	margin: 0 auto;
 	position: relative;
-	height: 150px;
+	height: 110px;
 }
 
 .toub_beij .logo {
 	width: 360px;
 	height: 60px;
-	padding: 35px 0 0 0;
+	padding: 10px 0 0 0;
 	float: left
 }
 
 .toub_beij .search {
 	float: left;
-	margin-top: 50px;
+	margin-top: 30px;
 	position: absolute;
-	right: 230px;
+	right: 400px;
 }
 
 .toub_beij .search .text {
@@ -238,7 +238,7 @@ _display: block;
 .toub_beij .search .button {
 	float: left;
 	width: 90px;
-	height: 42px;
+	height: 40px;
 	background: #da0501;
 	border: none;
 	color: #fff;
@@ -255,7 +255,7 @@ _display: block;
 	text-align: center;
 	line-height: 34px;
 	float: right;
-	margin-top: 50px;
+	margin-top: 30px;
 	font-size: 9pt;
 	position: relative
 }
@@ -397,8 +397,8 @@ _display: block;
 	clear: both;
     width: 500px;
     position: absolute;
-    top: 98px;
-    right: 218px;
+    top: 75px;
+    right: 348px;
 }
 
 .hotwords a {
