@@ -38,7 +38,7 @@ public class TbContentController {
 
 
     /**
-     * 幻灯片接口
+     * 根据类别 ID 查询内容列表
      * @return
      */
     @GetMapping("{category_id}")

@@ -40,11 +40,11 @@
         <p class="login-box-msg">欢迎管理员登陆</p>
         <form action="/login" method="post">
             <div class="form-group has-feedback">
-                <input type="email" name="email" class="form-control" placeholder="邮箱" value="${email}">
+                <input type="email" name="email" class="form-control" placeholder="邮箱,admin@163.com" value="${email}" >
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" name="password" class="form-control" placeholder="密码" value="${password}">
+                <input type="password" name="password" class="form-control" placeholder="密码,admin@163.com" value="${password}">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="alert alert-danger alert-dismissible" ${message == null ? "style='display:none;'" : "" }>

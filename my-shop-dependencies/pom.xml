@@ -38,6 +38,8 @@
         <jackson.version>2.9.5</jackson.version>
         <hibernate.validator.version>5.3.4.Final</hibernate.validator.version>
         <commons.fileupload.version>1.3.2</commons.fileupload.version>
+        <httpclient.version>4.5.5</httpclient.version>
+        <jackson.version>2.9.5</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -184,6 +186,44 @@
                 <version>${commons.fileupload.version}</version>
             </dependency>
             <!-- Fileupload End -->
+
+            <!-- Httpclient Begin -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!--fluent-hc是HttpClient基于流式API封装的客户端-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>fluent-hc</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!--httpClient在使用 MultipartEntity 上传图片或文件的需要的依赖-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!-- Httpclient End -->
+
+            <!-- Json Begin -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- Json End -->
 
         </dependencies>
     </dependencyManagement>
