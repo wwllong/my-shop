@@ -12,6 +12,9 @@ public class Api {
     // 主机地址
     public static final String HOST = "http://localhost:8090/api/v1";
 
-    // 内容管理
-    public static final String API_CONTENTS = HOST + "/contents/";
+    // 内容管理 - 首页幻灯片
+    public static final String API_CONTENTS_PPT = HOST + "/contents/89";
+
+    // 会员管理接口 - 登录
+    public static final String API_USERS_LOGIN = HOST + "/users/login";
 }

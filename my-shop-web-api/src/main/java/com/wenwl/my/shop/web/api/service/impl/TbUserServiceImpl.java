@@ -30,7 +30,7 @@ public class TbUserServiceImpl implements TbUserService {
         TbUser user = tbUserDao.login(tbUser);
 
         if (user != null) {
-            // 将明文密码加密
+            // 将明文密码加密 ，判断是否相等
             String password = DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes());
             if (password.equals(user.getPassword())) {
                 return user;

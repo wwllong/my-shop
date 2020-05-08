@@ -34,4 +34,11 @@
         <property name="defaultEncoding" value="${web.file.defaultEncoding}"/>
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/login"/>
+            <mvc:mapping path="/register"/>
+            <bean class="com.wenwl.my.shop.web.ui.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

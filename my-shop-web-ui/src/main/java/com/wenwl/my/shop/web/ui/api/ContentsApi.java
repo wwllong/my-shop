@@ -21,10 +21,9 @@ public class ContentsApi {
      */
     public static List<TbContentDTO> indexBanner(){
         List<TbContentDTO> tbContents = null;
-        String result = HttpClientUtils.doGet(Api.API_CONTENTS + 89);
+        String result = HttpClientUtils.doGet(Api.API_CONTENTS_PPT);
         try {
             tbContents = JacksonUtils.json2listByTree(result, "data", TbContentDTO.class);
-            System.out.println(tbContents);
         } catch (Exception e) {
             e.printStackTrace();
         }
