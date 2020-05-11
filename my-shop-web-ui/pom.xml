@@ -57,6 +57,11 @@
         </dependency>
         <!-- Servlet End -->
 
+        <dependency>
+            <groupId>com.google.code.kaptcha</groupId>
+            <artifactId>kaptcha</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

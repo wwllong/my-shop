@@ -1,9 +1,11 @@
 package com.wenwl.my.shop.web.ui.controller;
 
+import com.google.code.kaptcha.Constants;
 import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.web.ui.api.UsersApi;
 import com.wenwl.my.shop.web.ui.constant.SystemConstants;
 import com.wenwl.my.shop.web.ui.dto.TbUserDTO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,10 +42,10 @@ public class LoginController {
     @PostMapping("login")
     public String login(TbUserDTO tbUser, Model model, HttpServletRequest request) throws Exception{
         // 验证码验证失败
-//        if (!checkVerification(tbUser, request)) {
-//            model.addAttribute("baseResult", BaseResult.fail("验证码输入错误，请重新输入"));
-//            return "login";
-//        }
+        if (!checkCaptcha(tbUser, request)) {
+            model.addAttribute("baseResult", BaseResult.fail("验证码输入错误，请重新输入"));
+            return "login";
+        }
 
         TbUserDTO user = UsersApi.login(tbUser);
         // 登录失败
@@ -58,6 +60,20 @@ public class LoginController {
             request.getSession().setAttribute(SystemConstants.SESSION_USER_KEY, user);
             return "redirect:/index";
         }
+    }
+
+    /**
+     * 校验验证码
+     * @param tbUser
+     * @param request
+     * @return
+     */
+    private boolean checkCaptcha(TbUserDTO tbUser, HttpServletRequest request) {
+        String captcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if (StringUtils.equals(captcha, tbUser.getCaptcha())) {
+            return true;
+        }
+        return false;
     }
 
     /**

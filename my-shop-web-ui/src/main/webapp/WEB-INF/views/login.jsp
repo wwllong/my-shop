@@ -50,6 +50,8 @@
 					<div class="txt_kuang">
 						<input id="username" name="username" type="text" class="itxt"  placeholder="邮箱/用户名/已验证手机">
 						<input id="password" name="password" type="password" class="itxt"  placeholder="密码">
+                        <input id="captcha" name="captcha" type="text" class="itxt" placeholder="验证码" style="width: 119px;">
+                        <img id="captcha-img" src="/captcha-image" style="float: right; padding-right: 23px; cursor: pointer;" title="看不清？换一张" />
 					</div>
 					<div class="remember">
 						<div class="fl">
@@ -78,6 +80,18 @@
 		<p class="gonga_bei">京公网安备：123456789号</p>
 	</div>
 </div>
+
+<!-- script start-->
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		// 刷新验证码
+		$("#captcha-img").bind("click", function () {
+			$(this).hide().attr('src', '/captcha-image?random=' + Math.random()).fadeIn();
+		});
+	});
+</script>
+<!-- script end-->
 
 </body>
 </html>

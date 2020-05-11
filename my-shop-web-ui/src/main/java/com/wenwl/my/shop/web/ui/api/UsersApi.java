@@ -6,7 +6,6 @@ import com.wenwl.my.shop.web.ui.dto.TbUserDTO;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author wenwl
