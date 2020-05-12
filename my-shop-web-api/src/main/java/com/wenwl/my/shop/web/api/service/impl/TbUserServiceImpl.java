@@ -1,11 +1,15 @@
 package com.wenwl.my.shop.web.api.service.impl;
 
+import com.wenwl.my.shop.commons.dto.BaseResult;
+import com.wenwl.my.shop.commons.utils.BeanValidator;
 import com.wenwl.my.shop.domain.entity.TbUser;
 import com.wenwl.my.shop.web.api.dao.TbUserDao;
 import com.wenwl.my.shop.web.api.service.TbUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import java.util.Date;
 
 /**
  * @author wenwl
@@ -20,11 +24,6 @@ public class TbUserServiceImpl implements TbUserService {
     @Autowired
     private TbUserDao tbUserDao;
 
-    /**
-     * 登录
-     * @param tbUser
-     * @return
-     */
     @Override
     public TbUser login(TbUser tbUser) {
         TbUser user = tbUserDao.login(tbUser);
@@ -38,5 +37,28 @@ public class TbUserServiceImpl implements TbUserService {
         }
 
         return null;
+    }
+
+    @Override
+    public BaseResult register(TbUser tbUser) {
+        String validator = BeanValidator.validator(tbUser);
+        // 验证不通过
+        if(validator != null){
+            return BaseResult.fail(validator);
+        }
+        // 验证通过，注册会员
+        else{
+            // 密码加密处理
+            tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
+            tbUser.setCreated(new Date());
+            tbUser.setUpdated(new Date());
+            tbUserDao.insert(tbUser);
+            return BaseResult.success("注册会员成功！");
+        }
+    }
+
+    @Override
+    public boolean checkRegister(TbUser tbUser) {
+        return tbUserDao.count(tbUser) > 0;
     }
 }

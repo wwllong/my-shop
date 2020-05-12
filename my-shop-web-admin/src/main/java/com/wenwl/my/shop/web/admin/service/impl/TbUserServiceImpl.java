@@ -49,7 +49,13 @@ public class TbUserServiceImpl extends BaseServiceImpl<TbUserDao, TbUser> implem
             }
             //编辑用户
             else{
-                // TODO 密码问题
+                if(tbUser.getPassword() != null){
+                    String trim = tbUser.getPassword().trim();
+                    if(!trim.isEmpty()){
+                        tbUser.setPassword(trim);
+                        tbUser.setPassword(DigestUtils.md5DigestAsHex(trim.getBytes()));
+                    }
+                }
                 baseDao.update(tbUser);
             }
             return BaseResult.success("保存信息成功");

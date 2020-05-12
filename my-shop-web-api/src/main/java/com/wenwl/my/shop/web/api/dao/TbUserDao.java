@@ -20,5 +20,17 @@ public interface TbUserDao{
      */
     TbUser login(TbUser tbUser);
 
+    /**
+     * 统计注册用户
+     * @param tbUser
+     * @return
+     */
+    int count(TbUser tbUser);
 
+    /**
+     * 新增用户
+     * @param tbUser
+     * @return
+     */
+    int insert(TbUser tbUser);
 }

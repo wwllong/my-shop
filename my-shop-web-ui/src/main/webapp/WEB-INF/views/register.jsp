@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,7 +31,11 @@
                 <p>我已经注册，现在就<a class="ftx-05 ml10" href="login">登录</a></p>
             </ul>
         </div>
-        <div class="zhuc_biaod">
+        <c:if test="${baseResult != null}">
+            <div class="red">${baseResult.message}</div>
+        </c:if>
+        <form action="/register" method="post">
+            <div class="zhuc_biaod">
             <div class="reg-items" >
               	<span class="reg-label">
                 	<label for="username">用户名：</label>
@@ -43,7 +48,7 @@
                             <div class="msg-cont">4-20个字符，支持汉字、字母、数字及“-”、“_”组合</div>
                         </div>
                     </div>
-                    <div class="msg-weak err-tips"  style="display: inline-block;"><div>请输入用户名</div></div>
+                    <div class="msg-weak err-tips"  style="display: none;"><div>请输入用户名</div></div>
                 </div>
                 <span class="suc-icon"></span>
             </div>
@@ -51,7 +56,7 @@
               	<span class="reg-label">
                 	<label for="password">设置密码：</label>
               	</span>
-                <input id="password" class="i-text" type="text">
+                <input id="password" name="password" class="i-text" type="text">
                 <!--备注————display使用 inline-block-->
                 <div class="msg-box">
                     <div class="msg-box" style="display: none;">
@@ -66,7 +71,7 @@
               	<span class="reg-label">
                 	<label for="repassword">确认密码：</label>
               	</span>
-                <input id="repassword"  class="i-text" type="text" disabled="disabled">
+                <input id="repassword" class="i-text" type="text" disabled="disabled">
                 <!--备注————display使用 inline-block-->
                 <div class="msg-box">
                     <div class="msg-weak err-tips"  style="display: none;"><div>密码不一样</div></div>
@@ -74,32 +79,37 @@
             </div>
             <div class="reg-items" >
               	<span class="reg-label">
-                	<label for="J_Name">手机号码：</label>
+                	<label for="phone">手机号码：</label>
               	</span>
-                <input   class="i-text" type="text">
+                <input id="phone" name="phone" class="i-text" type="text">
                 <!--备注————display使用 inline-block-->
-                <div class="msg-box">
+                <!--div class="msg-box">
                     <div class="msg-weak err-tips"  style="display:none;"><div>手机号不能为空</div></div>
-                </div>
+                </div-->
             </div>
             <div class="reg-items" >
               	<span class="reg-label">
-                	<label for="J_Name">手机号码：</label>
+                	<label for="email">邮箱：</label>
               	</span>
-                <input   class="i-text i-short" type="text">
+                <input id="email" name="email" class="i-text" type="text">
+            </div>
+            <!--div class="reg-items" >
+              	<span class="reg-label">
+                	<label for="captcha">验证码：</label>
+              	</span>
+                <input id="captcha"class="i-text i-short" type="text">
                 <div class="check check-border" style="position:relative;left:0">
                     <a class="check-phone" style="padding:11px 10px 14px 10px;*line-height:60px;">获取短信验证码</a>
                     <span class="check-phone disable" style="display: none;"><em>60</em>秒后重新获取</span>
                     <a class="check-phone" style="display: none;padding:11px 10px 14px 10px">重新获取验证码</a>
                 </div>
-                <!--备注————display使用 inline-block-->
                 <div class="msg-box">
                     <div class="msg-weak err-tips"  style="display:none;"><div>请输入短信验证码</div></div>
                 </div>
-            </div>
+            </div-->
             <div class="reg-items" >
               	<span class="reg-label">
-                	<label for="J_Name"> </label>
+                	<label> </label>
               	</span>
                 <div class="dag_biaod">
                     <input type="checkbox" value="english" >
@@ -110,11 +120,12 @@
             </div>
             <div class="reg-items" >
               	<span class="reg-label">
-                	<label for="J_Name"> </label>
+                	<label > </label>
               	</span>
-                <input class="reg-btn" value="立即注册" type="button">
+                <input class="reg-btn" value="立即注册" type="submit">
             </div>
         </div>
+        </form>
         <div class="xiaogg">
             <img src="/static/images/cdsgfd.jpg">
         </div>

@@ -59,7 +59,9 @@
           tb_user
         SET
           username = #{username},
-          password = #{password},
+          <if test="password !=null and password != ''">
+              password = #{password},
+          </if>
           phone = #{phone},
           email = #{email},
           created = #{created},

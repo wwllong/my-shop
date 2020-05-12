@@ -20,4 +20,35 @@
           OR phone = #{username}
           OR email = #{username}
     </select>
+
+    <select id="count" resultType="java.lang.Integer">
+         SELECT COUNT(1)
+         FROM
+          tb_user AS a
+        WHERE username = #{username}
+          OR phone = #{username}
+          OR email = #{username}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO tb_user  (
+            id,
+            username,
+            PASSWORD,
+            phone,
+            email,
+            created,
+            updated
+        )
+        VALUES(
+            #{id},
+            #{username},
+            #{password},
+            #{phone},
+            #{email},
+            #{created},
+            #{updated}
+        )
+    </insert>
+
 </mapper>

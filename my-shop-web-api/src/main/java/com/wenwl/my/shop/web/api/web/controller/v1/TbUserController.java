@@ -26,7 +26,6 @@ public class TbUserController {
 
     /**
      * 登录
-     *
      * @param tbUser
      * @return
      */
@@ -39,6 +38,21 @@ public class TbUserController {
             TbUserDTO dto = new TbUserDTO();
             BeanUtils.copyProperties(user, dto);
             return BaseResult.success("成功", dto);
+        }
+    }
+
+    /**
+     * 注册
+     *
+     * @param tbUser
+     * @return
+     */
+    @PostMapping("register")
+    public BaseResult register(TbUser tbUser) {
+        if(tbUserService.checkRegister(tbUser)){
+            return BaseResult.fail("该用户已被注册！");
+        }else{
+            return tbUserService.register(tbUser);
         }
     }
 

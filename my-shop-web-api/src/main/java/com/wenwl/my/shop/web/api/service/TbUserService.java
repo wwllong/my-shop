@@ -1,5 +1,6 @@
 package com.wenwl.my.shop.web.api.service;
 
+import com.wenwl.my.shop.commons.dto.BaseResult;
 import com.wenwl.my.shop.domain.entity.TbUser;
 
 /**
@@ -17,4 +18,17 @@ public interface TbUserService {
      */
     TbUser login(TbUser tbUser);
 
+    /**
+     * 注册
+     * @param tbUser
+     * @return
+     */
+    BaseResult register(TbUser tbUser);
+
+    /**
+     * 校验是否重复注册
+     * @param tbUser
+     * @return
+     */
+    boolean checkRegister(TbUser tbUser);
 }
