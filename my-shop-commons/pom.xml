@@ -55,6 +55,7 @@
         </dependency>
         <!-- Json End -->
 
+        <!-- Commons Begin -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -63,6 +64,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+        </dependency>
+        <!-- Commons End -->
 
         <!-- Hibernate Validator Start-->
         <dependency>

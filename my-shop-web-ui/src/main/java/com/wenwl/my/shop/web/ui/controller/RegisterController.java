@@ -1,6 +1,7 @@
 package com.wenwl.my.shop.web.ui.controller;
 
 import com.wenwl.my.shop.commons.dto.BaseResult;
+import com.wenwl.my.shop.commons.utils.EmailUtils;
 import com.wenwl.my.shop.web.ui.api.UsersApi;
 import com.wenwl.my.shop.web.ui.dto.TbUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class RegisterController {
 
-//    @Autowired
-//    private EmailSendUtils emailSendUtils;
+    @Autowired
+    private EmailUtils emailUtils;
 
     /**
      * 跳转注册页
@@ -44,7 +45,7 @@ public class RegisterController {
         }
         // 注册成功，发送邮件
         else{
-//            emailSendUtils.send("欢迎注册", String.format("用户 【%s】 欢迎入驻 MyShop", tbUser.getUsername()), tbUser.getEmail());
+            emailUtils.sendSimpleText("欢迎注册", String.format("用户 【%s】 欢迎入驻 MyShop", tbUser.getUsername()), tbUser.getEmail());
             model.addAttribute("baseResult", result);
             return "login";
         }
