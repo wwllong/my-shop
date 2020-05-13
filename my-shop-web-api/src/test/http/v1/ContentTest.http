@@ -1,0 +1,31 @@
+POST {{host}}/{{api-path}}/users/login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="username"
+
+admin@163.com
+--WebAppBoundary--
+Content-Disposition: form-data; name="password"
+
+123456
+--WebAppBoundary--
+
+> {% client.global.set("auth_token", response.body.data.token); %}
+
+###
+POST {{host}}/{{api-path}}/users/login
+Content-Type: application/json
+
+{
+  "username": "admin@163.com",
+  "password": "123456"
+}
+
+###
+
+GET {{host}}/{{api-path}}/contents/89
+Accept: application/json
+Authorization: Bearer {{auth_token}}
+
+###

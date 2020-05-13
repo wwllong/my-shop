@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * @author wenwl
@@ -20,4 +21,6 @@ public class TbUserDTO implements Serializable {
     private String password;
     private String phone;
     private String email;
+    // 测试 http client 调接口用
+    private String token = UUID.randomUUID().toString().replace("-", "");
 }
