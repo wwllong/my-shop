@@ -278,7 +278,8 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>*</include>
+                    <include>**/*.xml</include>
+                    <include>*.properties</include>
                 </includes>
             </resource>
         </resources>

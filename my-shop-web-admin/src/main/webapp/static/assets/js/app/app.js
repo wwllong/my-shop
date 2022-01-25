@@ -144,7 +144,7 @@ var App = function () {
 
         // 将要删除的元素的ID放入数组
         _checkbox.each( function(){
-            let _id = $(this).val();
+            let _id = $(this).attr("id");;
             if(!!_id && $(this).is(":checked")){ // !!_id 等于 (_id!=null && _id!="" && _id!=undefined)
                 _idArray.push(_id);
             }
